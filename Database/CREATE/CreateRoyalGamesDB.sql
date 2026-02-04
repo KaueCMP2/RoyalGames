@@ -1,0 +1,102 @@
+CREATE DATABASE RoyalGames
+GO
+
+USE RoyalGames
+GO
+
+CREATE TABLE Usuario
+(
+UsuarioId INT IDENTITY PRIMARY KEY,
+Nome VARCHAR (60) NOT NULL,
+Email VARCHAR (150) NOT NULL UNIQUE,
+Senha VARBINARY (MAX) NOT NULL,
+StatusUsuario BIT DEFAULT 1 NOT NULL
+)
+GO
+
+CREATE TABLE ClassificacaoIndicativa
+(
+ClassificacaoId INT IDENTITY PRIMARY KEY,
+ClassificacaoNome VARCHAR (15) NOT NULL
+)
+GO
+
+CREATE TABLE Jogo
+(
+JogoId INT IDENTITY PRIMARY KEY,
+Nome NVARCHAR (100) NOT NULL UNIQUE,
+Descricao NVARCHAR (MAX) NOT NULL,
+Valor DECIMAL (10, 2) NOT NULL,
+Imagem VARBINARY (MAX) NOT NULL,
+StatusJogo BIT DEFAULT 1 NOT NULL,
+ClassificacaoId INT NOT NULL,
+CONSTRAINT FK_Jogo_ClassificacaoId FOREIGN KEY (ClassificacaoId) REFERENCES ClassificacaoIndicativa 
+)
+GO
+
+CREATE TABLE Log_AlteracaoJogo
+(
+Log_AlteracaoJogoId INT IDENTITY PRIMARY KEY,
+NomeAnterior NVARCHAR (100) NOT NULL,
+ValorAnterior DECIMAL (10, 2) NOT NULL,
+DataAlteracao DECIMAL (10, 2) NOT NULL,
+JogoId INT NOT NULL,
+CONSTRAINT FK_Log_Alteracao_JogoId FOREIGN KEY (JogoId) REFERENCES Jogo (JogoId)
+)
+GO
+
+CREATE TABLE Promocao
+(
+PromocaoId INT IDENTITY PRIMARY KEY,
+Nome NVARCHAR (100) NOT NULL,
+DataExpiracao DATETIME NOT NULL,
+StatusPromocao BIT DEFAULT 1
+)
+GO
+
+CREATE TABLE JogoPromocao
+(	
+PromocaoId INT NOT NULL,
+JogoId INT NOT NULL,
+Valor DECIMAL,
+CONSTRAINT PK_JogoPromocao_JogoId_PromocaoId PRIMARY KEY (PromocaoId, JogoId), 
+CONSTRAINT FK_JogoPromocao_JogoId FOREIGN KEY (JogoId) REFERENCES Jogo (JogoId),
+CONSTRAINT FK_JogoPromocao_Promocao_PromocaoId FOREIGN KEY (PromocaoId) REFERENCES Promocao (PromocaoId)
+)
+GO
+
+CREATE TABLE Plataforma
+(
+PlataformaId INT IDENTITY PRIMARY KEY,
+Nome Varchar (20) NOT NULL UNIQUE
+)
+GO
+
+CREATE TABLE JogoPlataforma
+(
+JogoId INT NOT NULL,
+PlataformaId INT NOT NULL,
+CONSTRAINT PK_JogoPlataforma_JogoId_PlataformaId PRIMARY KEY (JogoId, PlataformaId),
+CONSTRAINT FK_JogoPlataforma_Jogo_JogoId FOREIGN KEY (JogoId) REFERENCES Jogo (JogoId),
+CONSTRAINT FK_JogoPlataforma_Plataforma_PlataformaId FOREIGN KEY (PlataformaId) REFERENCES Jogo (JogoId)
+
+)
+GO
+
+CREATE TABLE Genero
+(
+GeneroId INT IDENTITY PRIMARY KEY,
+Nome Varchar (20) NOT NULL UNIQUE
+)
+GO
+
+CREATE TABLE JogoGenero
+(
+JogoId INT NOT NULL,
+GeneroId INT NOT NULL,
+CONSTRAINT PK_JogoGenero_JogoId_GeneroId PRIMARY KEY (JogoId, GeneroId),
+CONSTRAINT FK_JogoGenero_Jogo_JogoId FOREIGN KEY (JogoId) REFERENCES Jogo (JogoId),
+CONSTRAINT FK_JogoGenero_Genero_GeneroId FOREIGN KEY (GeneroId) REFERENCES Genero (GeneroId)
+)
+GO
+
