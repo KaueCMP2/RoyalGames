@@ -39,7 +39,7 @@ CREATE TABLE Log_AlteracaoJogo
 Log_AlteracaoJogoId INT IDENTITY PRIMARY KEY,
 NomeAnterior NVARCHAR (100) NOT NULL,
 ValorAnterior DECIMAL (10, 2) NOT NULL,
-DataAlteracao DECIMAL (10, 2) NOT NULL,
+DataAlteracao DATETIME NOT NULL,
 JogoId INT NOT NULL,
 CONSTRAINT FK_Log_Alteracao_JogoId FOREIGN KEY (JogoId) REFERENCES Jogo (JogoId)
 )
@@ -100,3 +100,43 @@ CONSTRAINT FK_JogoGenero_Genero_GeneroId FOREIGN KEY (GeneroId) REFERENCES Gener
 )
 GO
 
+
+
+-- TRIGGER
+-- TRIGGER PARA ALTERAR O STATUS DO USUARIO QUANDO O MESMO FOR DEMITIDO DE 1 PARA 0
+CREATE TRIGGER tgr_Usuario_UsuarioStatus
+ON Usuario
+INSTEAD OF DELETE
+AS 
+BEGIN
+	UPDATE Usuario
+	SET StatusUsuario = 0
+	FROM Usuario u
+	JOIN deleted d ON u.UsuarioId = d.UsuarioId
+END 
+GO
+
+-- TRIGGER PARA INSERIR OS REGISTROS ANTIGOS QUE FORAM ALTERADOR NA TABELA JOGO
+CREATE TRIGGER tgr_JogoAlteracao
+ON Jogo
+AFTER UPDATE
+AS 
+BEGIN
+	INSERT INTO Log_AlteracaoJogo(DataAlteracao, NomeAnterior, JogoId, ValorAnterior)
+	SELECT GETDATE(), Nome, JogoId, Valor FROM deleted
+END
+GO
+
+
+-- TRIGGER PARA ALTERAR O STATUS DO JOGO QUANDO O MESMO FOR DEMITIDO DE 1 PARA 0
+CREATE TRIGGER tgr_Jogo_StatusJogo
+ON Jogo
+INSTEAD OF DELETE
+AS 
+BEGIN
+	UPDATE Jogo
+	SET StatusJogo = 0
+	FROM Jogo j
+	JOIN deleted d ON j.JogoId= d.JogoId
+END 
+GO
