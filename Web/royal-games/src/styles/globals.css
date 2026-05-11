@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css?family=Orbitron');
+@import url('https://googleapis.com');
+
+:root {
+    --preto-escuro: #0B0616;
+    --cinza-escuro: #221C2D;
+    --vermelho-rosado: #FF004C;
+    --roxo: #7A3BFF;
+    --branco: #ffffff;
+    --cinza-claro: #D6D2E6;
+
+    --fonte-padrao: 'Orbitron', sans-serif;
+    --fonte-secundaria: 'Exo 2', sans-serif;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+
+.layout-grid {
+    width: 80%;
+}
+
+body {
+    background-color: var(--cinza-escuro);
+}
