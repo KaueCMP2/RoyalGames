@@ -1,4 +1,5 @@
-CREATE DATABASE RoyalGames
+
+	CREATE DATABASE RoyalGames
 GO
 
 USE RoyalGames
