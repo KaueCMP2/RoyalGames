@@ -4,12 +4,14 @@ import Header from '@/components/Header/Header'
 import SaveGame from '@/components/SaveGame/SaveGame'
 import React from 'react'
 import styles from '@/pages/home/home.module.css'
+import GameList from '@/components/GameList/GameList'
 
 const HomePage = () => {
   return (
     <body id={styles.body}>
       <Header />
       <Banner />
+      <GameList />
       <Footer />
     </body>
   )
