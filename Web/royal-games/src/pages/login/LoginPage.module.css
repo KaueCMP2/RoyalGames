@@ -44,7 +44,7 @@
     align-items: start;
     flex-direction: column;
     width: 60%;
-    font-family: var(--fonte-padrao);
+    font-family: var(--font-padrao);
     color: var(--branco);
     font-weight: bolder;
     gap: 5%;

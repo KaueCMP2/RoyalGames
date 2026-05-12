@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Orbitron');
 @import url('https://googleapis.com');
+@import url('https://fonts.gstatic.com');
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
     --preto-escuro: #0B0616;
@@ -9,9 +11,9 @@
     --branco: #ffffff;
     --cinza-claro: #D6D2E6;
 
-    --fonte-padrao: 'Orbitron', sans-serif;
-    --fonte-secundaria: 'Exo 2', sans-serif;
-    --fonte-tercearia: 'Inter var', sans-serif;
+    --font-padrao: 'Orbitron', sans-serif;
+    --font-secundaria: 'Exo 2', sans-serif;
+    --font-tercearia: 'Inter var', sans-serif;
 }
 
 * {
@@ -19,9 +21,8 @@
     margin: 0;
 }
 
-
 .layout-grid {
-    width: 80%;
+    width: 90%;
 }
 
 body {
