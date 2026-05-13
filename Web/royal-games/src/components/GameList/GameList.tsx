@@ -16,7 +16,7 @@ const GameList = () => {
                 </div>
             </div>
 
-            <ul id={styles.container_games} className='layout-grid'> 
+            <ul id={styles.container_games} className='layout-grid'>
                 <CardGame />
                 <CardGame />
                 <CardGame />
