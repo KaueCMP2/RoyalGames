@@ -8,7 +8,7 @@ import GameList from '@/components/GameList/GameList'
 
 const HomePage = () => {
   return (
-    <body id={styles.body}>
+    <main id={styles.body}>
       <Header />
       <Banner />
       <GameList />
@@ -30,7 +30,7 @@ const HomePage = () => {
       </section>
 
       <Footer />
-    </body>
+    </main>
   )
 }
 

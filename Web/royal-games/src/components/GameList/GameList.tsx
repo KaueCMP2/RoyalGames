@@ -8,7 +8,7 @@ const GameList = () => {
             <h2>Catálogo de jogos</h2>
 
             <div id={styles.container_search}>
-                <input type="text" placeholder='pesquise...' id={styles.search_input} />
+                <input type="text" placeholder="pesquise..." id={styles.search_input} />
 
                 <div id={styles.container_buttons}>
                     <button id={styles.btn_price}>Menor Preço</button>
