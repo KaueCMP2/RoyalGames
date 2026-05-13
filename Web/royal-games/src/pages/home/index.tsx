@@ -12,6 +12,23 @@ const HomePage = () => {
       <Header />
       <Banner />
       <GameList />
+
+      <section id={styles.quest_section}>
+        <h2>Jogos online podem afetar o comportamento humano?</h2>
+        <div id={styles.content_quest_section}>
+          <div id={styles.cover_game_question}>
+            <img src="../game-cover/lol2.png" alt="capa do jogo league of legends" />
+            <img src="../game-cover/cs.png" alt="capa do jogo counter strike" />
+          </div>
+        </div>
+
+
+        <article>
+          <p>Estudos indicam que jogos podem alterar o comportamento humano...</p>
+          <p>Principalmente quando o time resolve testar sua paciência em plena partida ranqueada.</p>
+        </article>
+      </section>
+
       <Footer />
     </body>
   )
