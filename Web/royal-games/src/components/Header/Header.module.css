@@ -22,7 +22,7 @@
     width: 22%;
     height: 100%;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 #icons_right a {
