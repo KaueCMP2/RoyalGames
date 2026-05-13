@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from '@/components/GameList/GameList.module.css'
+import { CardGame } from '../CardGame/CardGame'
 
 const GameList = () => {
     return (
@@ -15,8 +16,13 @@ const GameList = () => {
                 </div>
             </div>
 
-            <ul id={styles.container_games}>
-
+            <ul id={styles.container_games} className='layout-grid'> 
+                <CardGame />
+                <CardGame />
+                <CardGame />
+                <CardGame />
+                <CardGame />
+                <CardGame />
             </ul>
         </section>
     )

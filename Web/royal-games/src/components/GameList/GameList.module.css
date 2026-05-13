@@ -4,6 +4,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 3%;
 }
 
 #game_list h2 {
@@ -21,7 +22,7 @@
     justify-content: space-between;
     width: 70%;
     height: auto;
-    margin: 3% 0 0 0;
+    margin: 4% 0 0 0;
 }
 
 #search_input {
@@ -73,4 +74,14 @@
 
 #container_buttons:nth-child(2) {
     width: 35%;
+}
+
+#container_games {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    place-items: center;
+    justify-content: space-between;
+
+    gap: 40px 0;
+    margin-top: 4%;
 }
