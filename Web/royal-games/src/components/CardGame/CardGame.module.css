@@ -26,12 +26,30 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: var(--cinza-claro);
+    color: var(--branco);
 
     width: 100%;
     height: 15%;
 }
 
 #container_info_card h3{
-    font-size: 1.6rem;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 0 0 2% 0;
+}
+
+#container_info_card p{
+    font-size: 1.2rem;
+}
+
+#card_content button {
+    border-radius: 10px;
+    font-size: 1.5rem;
+    font-family: var(--fonte-principal);
+    background-color: var(--vermelho-rosado);
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 48%;
+    height: 55px;
 }
