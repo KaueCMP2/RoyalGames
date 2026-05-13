@@ -10,7 +10,7 @@ const HomePage = () => {
   return (
     <main id={styles.body}>
       <Header />
-      <Banner />
+      <SaveGame />
       <GameList />
 
       <section id={styles.quest_section}>
