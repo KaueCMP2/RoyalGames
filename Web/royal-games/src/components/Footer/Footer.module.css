@@ -3,11 +3,11 @@
     justify-content: center;
     width: 100%;
 
-    height: 30vh;
+    height: 20vh;
 
     font-family: var(--font-secundaria);
     color: var(--branco);
-    font-size: 2rem;
+    font-size: 1.6rem;
 }
 
 #content_footer {
@@ -21,8 +21,9 @@
     flex-direction: column;
     justify-content: space-between;
     height: 70%;
+    text-align: end;
 }
 
 #logo {
-    width:  30%;
+    width:  25%;
 }
