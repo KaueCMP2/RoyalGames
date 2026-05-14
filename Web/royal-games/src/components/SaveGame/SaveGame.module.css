@@ -1,18 +1,163 @@
 #save_game {
     width: 100%;
-    height: 85vh;
+    height: 75vh;
 
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: var(--font-padrao);
 }
 
 #form_save_game {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-evenly;
     height: 90%;
     border-radius: 10px;
     box-shadow: 0 0 10px #fff inset;
+}
+
+#form_save_game h2 {
+    color: var(--cinza-claro);
+    font-family: var(--font-padrao);
+    font-size: 2.3rem;
+    font-weight: 500;
+    padding: 0 0% 2% 0%;
+    border-bottom: 1px solid var(--vermelho-rosado);
+}
+
+#form_save_game input,
+#textarea {
+    margin-top: 1%;
+    border: none;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.074);
+    box-shadow: 0 0 4px #fff inset;
+}
+
+
+#middle {
+    height: 50%;
+    border-radius: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#side1 {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 55%;
+    height: 85%;
+    color: var(--cinza-claro);
+    font-family: var(--font-tercearia);
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+#middle input {
+    height: 40px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+#row1 {
+    width: 90%;
+}
+
+#row2 {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#inpt1,
+#inpt2,
+#inpt3,
+#inpt4,
+#inpt5,
+#inpt6 {
+    display: flex;
+    flex-direction: column;
+}
+
+#inpt2,
+#inpt3 {
+    width: 28%;
+}
+
+#inpt4 {
+    width: 36%;
+}
+
+#inpt5 {
+    width: 40%;
+}
+
+#inpt6 {
+    width: 20%;
+}
+
+#inpt_class {
+    width: 100%;
+}
+
+#row3 {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    gap: 4%;
+    width: 90%;
+}
+
+#side2 {
+    width: 40%;
+    height: 95%;
+    color: var(--cinza-claro);
+    font-family: var(--font-tercearia);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--cinza-claro);
+    font-family: var(--font-tercearia);
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+#inpt7 {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: 90%;
+}
+
+#inpt7 label {
+    padding: 0;
+    margin: 0;
+}
+
+#inpt7 textarea {
+    height: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 90%;
+    border-radius: 10px;
+}
+
+#form_save_game button {
+    width: 13%;
+    height: 45px;
+    border-radius: 5px;
+    border: 2px solid var(--vermelho-rosado);
+    background-color: transparent;
+    color: var(--branco);
+    font-size: 1.2rem;
+    font-weight: 500;
+    cursor: pointer;
 }
