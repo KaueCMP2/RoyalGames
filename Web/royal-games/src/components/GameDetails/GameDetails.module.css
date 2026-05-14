@@ -9,7 +9,7 @@
 
 #content_main {
     display: flex;
-    padding: 2% 0 0 0 ;
+    padding: 2% 0 0 0;
     flex-direction: column;
     align-items: center;
     height: 85%;
@@ -70,27 +70,38 @@
 #game_article h2 {
     text-align: center;
     margin: 0 0 4% 0;
-    align-self: f;
+    font-size: 2rem;
 }
 
 #game_article p {
     margin: 0;
     padding: 0;
     font-weight: 300;
+    font-size: 1.2rem;
     text-align: unset;
-    font-family: var(--font-tercearia);    
+    font-family: var(--font-tercearia);
 }
+
 
 #game_details {
     color: var(--branco);
     width: 100%;
     display: grid;
-    grid-template-columns:auto auto;
+    grid-template-columns: auto auto;
     gap: 0 0%;
 }
 
-#game_details p{
-    font-family: var(--font-padrao);
+#game_details p {
+    font-family: var(--font-tercearia);
+    font-size: 1.3rem;
     margin: 0;
     padding: 0;
+
+}
+
+#game_details span {
+    font-family: var(--font-padrao);
+    font-weight: 450;
+    font-size: 1.4rem;
+    color: var(--branco);
 }
