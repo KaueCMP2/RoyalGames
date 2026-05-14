@@ -3,7 +3,7 @@
     justify-content: center;
     width: 100%;
     height: 15vh;
-    font-family: var(--fonte-secundaria);
+    font-family: var(--font-secundaria);
 }
 
 #content_header {
@@ -34,7 +34,7 @@
     text-align: center;
 }
 
-#link_perfil {
+#link_deslog {
     border: 1px solid var(--vermelho-rosado);
     border-radius: 5px;
 }

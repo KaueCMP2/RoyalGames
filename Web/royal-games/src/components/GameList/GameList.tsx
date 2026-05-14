@@ -4,7 +4,7 @@ import { CardGame } from '../CardGame/CardGame'
 
 const GameList = () => {
     return (
-        <section id={styles.game_list}>
+        <section id='game_list' className={styles.game_list}>
             <h2>Catálogo de jogos</h2>
 
             <div id={styles.container_search}>
