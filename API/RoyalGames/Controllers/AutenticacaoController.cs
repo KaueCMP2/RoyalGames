@@ -4,7 +4,7 @@ using RoyalGames.Aplications.Services;
 using RoyalGames.DTOs.AutenticacaoDto;
 using RoyalGames.Exceptions;
 
-namespace VHBurguer.Controllers
+namespace RoyalGames.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

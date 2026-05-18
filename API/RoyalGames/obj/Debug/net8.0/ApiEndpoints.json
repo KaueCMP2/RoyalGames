@@ -1,6 +1,6 @@
 [
   {
-    "ContainingType": "VHBurguer.Controllers.AutenticacaoController",
+    "ContainingType": "RoyalGames.Controllers.AutenticacaoController",
     "Method": "Login",
     "RelativePath": "api/Autenticacao/login",
     "HttpMethod": "POST",
@@ -368,7 +368,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "VHBurguer.Controllers.UsuarioController",
+    "ContainingType": "RoyalGames.Controllers.UsuarioController",
     "Method": "Listar",
     "RelativePath": "api/Usuario",
     "HttpMethod": "GET",
@@ -388,7 +388,7 @@
     ]
   },
   {
-    "ContainingType": "VHBurguer.Controllers.UsuarioController",
+    "ContainingType": "RoyalGames.Controllers.UsuarioController",
     "Method": "Adicionar",
     "RelativePath": "api/Usuario",
     "HttpMethod": "POST",
@@ -414,7 +414,7 @@
     ]
   },
   {
-    "ContainingType": "VHBurguer.Controllers.UsuarioController",
+    "ContainingType": "RoyalGames.Controllers.UsuarioController",
     "Method": "ObterPorId",
     "RelativePath": "api/Usuario/{id}",
     "HttpMethod": "GET",
@@ -440,7 +440,7 @@
     ]
   },
   {
-    "ContainingType": "VHBurguer.Controllers.UsuarioController",
+    "ContainingType": "RoyalGames.Controllers.UsuarioController",
     "Method": "Atualizar",
     "RelativePath": "api/Usuario/{id}",
     "HttpMethod": "PUT",
@@ -471,7 +471,7 @@
     ]
   },
   {
-    "ContainingType": "VHBurguer.Controllers.UsuarioController",
+    "ContainingType": "RoyalGames.Controllers.UsuarioController",
     "Method": "Remover",
     "RelativePath": "api/Usuario/{id}",
     "HttpMethod": "DELETE",
@@ -487,7 +487,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "VHBurguer.Controllers.UsuarioController",
+    "ContainingType": "RoyalGames.Controllers.UsuarioController",
     "Method": "ObterPorEmail",
     "RelativePath": "api/Usuario/email/{email}",
     "HttpMethod": "GET",

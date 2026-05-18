@@ -5,7 +5,7 @@ using RoyalGames.DTOs.UsuarioDto;
 using RoyalGames.Exceptions;
 
 
-namespace VHBurguer.Controllers
+namespace RoyalGames.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\23969368839\\Documents\\Royal-Games\\RoyalGames\\RoyalGames.csproj": {}
+    "C:\\Users\\23969368839\\Documents\\RoyalGames\\API\\RoyalGames\\RoyalGames.csproj": {}
   },
   "projects": {
-    "C:\\Users\\23969368839\\Documents\\Royal-Games\\RoyalGames\\RoyalGames.csproj": {
+    "C:\\Users\\23969368839\\Documents\\RoyalGames\\API\\RoyalGames\\RoyalGames.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\23969368839\\Documents\\Royal-Games\\RoyalGames\\RoyalGames.csproj",
+        "projectUniqueName": "C:\\Users\\23969368839\\Documents\\RoyalGames\\API\\RoyalGames\\RoyalGames.csproj",
         "projectName": "RoyalGames",
-        "projectPath": "C:\\Users\\23969368839\\Documents\\Royal-Games\\RoyalGames\\RoyalGames.csproj",
+        "projectPath": "C:\\Users\\23969368839\\Documents\\RoyalGames\\API\\RoyalGames\\RoyalGames.csproj",
         "packagesPath": "C:\\Users\\23969368839\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\23969368839\\Documents\\Royal-Games\\RoyalGames\\obj\\",
+        "outputPath": "C:\\Users\\23969368839\\Documents\\RoyalGames\\API\\RoyalGames\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -54,6 +54,10 @@
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[8.0.24, )"
+            },
+            "Microsoft.AspNetCore.Cors": {
+              "target": "Package",
+              "version": "[2.3.10, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -99,7 +103,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.108/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

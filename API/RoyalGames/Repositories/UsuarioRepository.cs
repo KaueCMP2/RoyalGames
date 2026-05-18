@@ -15,7 +15,7 @@ namespace RoyalGames.Repositories
 
         public List<Usuario> Listar()
         {
-            return _context.Usuario.ToList();
+            return _context.Usuario.OrderBy(u => u.UsuarioID).ToList();
         }
 
         public Usuario? ObterPorId(int id)

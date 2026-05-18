@@ -28,8 +28,7 @@ namespace RoyalGames.Aplications.Authentication
             var audience = _config["Jwt:Audience"]!;
 
             // Tempo de validade
-            var ExpiraEmMinutos = int.Parse(_config["Jwt:ExpirationTime"]!);
-
+            var expiraEmMinutos = int.Parse(_config["Jwt:ExpirationTime"]!);
 
             // Converte a chave em bytes
             var keyBytes = Encoding.UTF8.GetBytes(chave);
@@ -56,7 +55,7 @@ namespace RoyalGames.Aplications.Authentication
                 issuer: issuer,                                         // Quem gerou o token
                 audience: audience,                                     // Quem pode usar o token
                 claims: claims,                                         // Os dados do usuario
-                expires: DateTime.Now.AddMinutes(ExpiraEmMinutos),      // Quando expira
+                expires: DateTime.Now.AddMinutes(expiraEmMinutos),      // Quando expira
                 signingCredentials: credentials                         // Assinatura de segurança
                 );
 

@@ -5,7 +5,7 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { ToastContainer } from "react-toastify";
-import { Orbitron } from "next/font/google"; 
+import { Orbitron } from "next/font/google";
 
 const orbitron = Orbitron({
   variable: "--font-primaria",
@@ -17,6 +17,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <main className={orbitron.variable}>
       <Component {...pageProps} />
+      <ToastContainer />
     </main>
   )
 }
