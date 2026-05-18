@@ -24,7 +24,7 @@ namespace RoyalGames.Aplications.Services
 
             List<LerGeneroDto> generoDto = generos.Select(genero => new LerGeneroDto
             {
-                GeneroID = genero.GeneroID,
+                GeneroId = genero.GeneroId,
                 Nome = genero.Nome
             }).ToList();
 
@@ -42,7 +42,7 @@ namespace RoyalGames.Aplications.Services
             }
             LerGeneroDto generoDto = new LerGeneroDto
             {
-                GeneroID = genero.GeneroID,
+                GeneroId = genero.GeneroId,
                 Nome = genero.Nome
             };
 

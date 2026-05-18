@@ -15,14 +15,14 @@ namespace RoyalGames.Repositories
 
         public List<Genero> Listar()
         {
-            return _context.Genero.ToList();
+            return _context.Genero.OrderBy(g => g.GeneroId).ToList();
         }
 
         // Busca uma genero pelo ID.
         public Genero ObterPorId(int id)
         {
             // Procura no banco o primeiro genero com o ID informado.
-            Genero genero  = _context.Genero.FirstOrDefault(g => g.GeneroID == id);
+            Genero genero  = _context.Genero.FirstOrDefault(g => g.GeneroId == id);
 
             // Retorna o genero encontrada ou null se não existir.
             return genero;
@@ -42,7 +42,7 @@ namespace RoyalGames.Repositories
             {
                 // Remove da busca o próprio genero
                 // Evita duplicidade.
-                consulta = consulta.Where(g => g.GeneroID != GeneroIdAtual.Value);
+                consulta = consulta.Where(g => g.GeneroId != GeneroIdAtual.Value);
             }
 
             //Verificação de genero com o mesmo nome, caso encontre retorna true se não false
@@ -59,7 +59,7 @@ namespace RoyalGames.Repositories
         public void Atualizar(Genero genero)
         {
             // Busca um genero pelo ID no banco 
-            Genero generoBanco = _context.Genero.FirstOrDefault(g => g.GeneroID == genero.GeneroID);
+            Genero generoBanco = _context.Genero.FirstOrDefault(g => g.GeneroId == genero.GeneroId);
 
             // Se não encontrar nada retorna a saído do método.
             if (generoBanco == null)
@@ -76,7 +76,7 @@ namespace RoyalGames.Repositories
         public void Remover(int id)
         {
             // Busca um genero pelo ID no banco 
-            Genero generoBanco = _context.Genero.FirstOrDefault(g => g.GeneroID == id);
+            Genero generoBanco = _context.Genero.FirstOrDefault(g => g.GeneroId == id);
 
             // Se não encontrar nada retorna a saído do método.
             if (generoBanco == null)

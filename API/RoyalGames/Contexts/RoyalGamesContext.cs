@@ -20,132 +20,150 @@ public partial class RoyalGamesContext : DbContext
 
     public virtual DbSet<Genero> Genero { get; set; }
 
-    public virtual DbSet<Log_AlteracaoProduto> Log_AlteracaoProduto { get; set; }
+    public virtual DbSet<Jogo> Jogo { get; set; }
+
+    public virtual DbSet<JogoPromocao> JogoPromocao { get; set; }
+
+    public virtual DbSet<Log_AlteracaoJogo> Log_AlteracaoJogo { get; set; }
 
     public virtual DbSet<Plataforma> Plataforma { get; set; }
 
-    public virtual DbSet<Produto> Produto { get; set; }
+    public virtual DbSet<Promocao> Promocao { get; set; }
 
     public virtual DbSet<Usuario> Usuario { get; set; }
-  
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=RoyalGames;Trusted_Connection=True;TrustServerCertificate=True;");
+        => optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS; Database=RoyalGames; Trusted_Connection=true; TrustServerCertificate=true");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<ClassificacaoIndicativa>(entity =>
         {
-            entity.HasKey(e => e.ClassificacaoID).HasName("PK__Classifi__D1D088EE0A06052C");
+            entity.HasKey(e => e.ClassificacaoId).HasName("PK__Classifi__D1D088CEDD299ADF");
 
-
-            entity.Property(e => e.Nome)
-                .HasMaxLength(50)
+            entity.Property(e => e.ClassificacaoNome)
+                .HasMaxLength(15)
                 .IsUnicode(false);
         });
 
         modelBuilder.Entity<Genero>(entity =>
         {
-            entity.HasKey(e => e.GeneroID).HasName("PK__Genero__A99D026841CA0EE5");
+            entity.HasKey(e => e.GeneroId).HasName("PK__Genero__A99D024853EB48ED");
 
-            entity.HasIndex(e => e.Nome, "UQ__Genero__7D8FE3B294606E01").IsUnique();
+            entity.HasIndex(e => e.Nome, "UQ__Genero__7D8FE3B2A178A2EC").IsUnique();
 
             entity.Property(e => e.Nome)
-                .HasMaxLength(50)
+                .HasMaxLength(20)
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<Log_AlteracaoProduto>(entity =>
+        modelBuilder.Entity<Jogo>(entity =>
         {
-            entity.HasKey(e => e.Log_AlteracaoProdutoID).HasName("PK__Log_Alte__D06C51B7DE2CFF99");
+            entity.HasKey(e => e.JogoId).HasName("PK__Jogo__59196835FC806CAE");
 
-            entity.Property(e => e.DataAlteracao).HasPrecision(0);
-            entity.Property(e => e.NomeAnterior)
-                .HasMaxLength(100)
-                .IsUnicode(false);
-            entity.Property(e => e.PrecoAnterior).HasColumnType("decimal(10, 2)");
+            entity.ToTable(tb =>
+                {
+                    tb.HasTrigger("tgr_JogoAlteracao");
+                    tb.HasTrigger("tgr_Jogo_StatusJogo");
+                });
 
-            entity.HasOne(d => d.Produto).WithMany(p => p.Log_AlteracaoProduto)
-                .HasForeignKey(d => d.ProdutoID)
-                .HasConstraintName("FK__Log_Alter__Produ__4F7CD00D");
+            entity.HasIndex(e => e.Nome, "UQ__Jogo__7D8FE3B2736BC68C").IsUnique();
+
+            entity.Property(e => e.Nome).HasMaxLength(100);
+            entity.Property(e => e.StatusJogo).HasDefaultValue(true);
+            entity.Property(e => e.Valor).HasColumnType("decimal(10, 2)");
+
+            entity.HasOne(d => d.Classificacao).WithMany(p => p.Jogo)
+                .HasForeignKey(d => d.ClassificacaoId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Jogo_ClassificacaoId");
+
+            entity.HasMany(d => d.Genero).WithMany(p => p.Jogo)
+                .UsingEntity<Dictionary<string, object>>(
+                    "JogoGenero",
+                    r => r.HasOne<Genero>().WithMany()
+                        .HasForeignKey("GeneroId")
+                        .OnDelete(DeleteBehavior.ClientSetNull),
+                    l => l.HasOne<Jogo>().WithMany()
+                        .HasForeignKey("JogoId")
+                        .OnDelete(DeleteBehavior.ClientSetNull),
+                    j =>
+                    {
+                        j.HasKey("JogoId", "GeneroId").HasName("PK_JogoGenero_JogoId_GeneroId");
+                    });
+
+            entity.HasMany(d => d.Plataforma).WithMany(p => p.Jogo)
+                .UsingEntity<Dictionary<string, object>>(
+                    "JogoPlataforma",
+                    r => r.HasOne<Plataforma>().WithMany()
+                        .HasForeignKey("PlataformaId")
+                        .OnDelete(DeleteBehavior.ClientSetNull),
+                    l => l.HasOne<Jogo>().WithMany()
+                        .HasForeignKey("JogoId")
+                        .OnDelete(DeleteBehavior.ClientSetNull),
+                    j =>
+                    {
+                        j.HasKey("JogoId", "PlataformaId").HasName("PK_JogoPlataforma_JogoId_PlataformaId");
+                    });
+        });
+
+        modelBuilder.Entity<JogoPromocao>(entity =>
+        {
+            entity.HasKey(e => new { e.PromocaoId, e.JogoId }).HasName("PK_JogoPromocao_JogoId_PromocaoId");
+
+            entity.Property(e => e.Valor).HasColumnType("decimal(18, 0)");
+
+            entity.HasOne(d => d.Jogo).WithMany(p => p.JogoPromocao)
+                .HasForeignKey(d => d.JogoId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
+            entity.HasOne(d => d.Promocao).WithMany(p => p.JogoPromocao)
+                .HasForeignKey(d => d.PromocaoId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+        });
+
+        modelBuilder.Entity<Log_AlteracaoJogo>(entity =>
+        {
+            entity.HasKey(e => e.Log_AlteracaoJogoId).HasName("PK__Log_Alte__BB9D2C6FEC742C7E");
+
+            entity.Property(e => e.DataAlteracao).HasColumnType("datetime");
+            entity.Property(e => e.NomeAnterior).HasMaxLength(100);
+            entity.Property(e => e.ValorAnterior).HasColumnType("decimal(10, 2)");
+
+            entity.HasOne(d => d.Jogo).WithMany(p => p.Log_AlteracaoJogo)
+                .HasForeignKey(d => d.JogoId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Log_Alteracao_JogoId");
         });
 
         modelBuilder.Entity<Plataforma>(entity =>
         {
-            entity.HasKey(e => e.PlataformaID).HasName("PK__Platafor__B835678DD990E914");
+            entity.HasKey(e => e.PlataformaId).HasName("PK__Platafor__B83567ED1688B8E4");
 
-            entity.HasIndex(e => e.Nome, "UQ__Platafor__7D8FE3B2C3BEE048").IsUnique();
+            entity.HasIndex(e => e.Nome, "UQ__Platafor__7D8FE3B296F494EF").IsUnique();
 
             entity.Property(e => e.Nome)
-                .HasMaxLength(50)
+                .HasMaxLength(20)
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<Produto>(entity =>
+        modelBuilder.Entity<Promocao>(entity =>
         {
-            entity.HasKey(e => e.ProdutoID).HasName("PK__Produto__9C8800C398C6AD94");
+            entity.HasKey(e => e.PromocaoId).HasName("PK__Promocao__254B581D336BBDA0");
 
-            entity.ToTable(tb =>
-                {
-                    tb.HasTrigger("trg_AlteracaoProduto");
-                    tb.HasTrigger("trg_ExclusaoProduto");
-                });
-
-            entity.HasIndex(e => e.Nome, "UQ__Produto__7D8FE3B2A451F887").IsUnique();
-
-            entity.Property(e => e.Nome)
-                .HasMaxLength(100)
-                .IsUnicode(false);
-            entity.Property(e => e.Preco).HasColumnType("decimal(10, 2)");
-            entity.Property(e => e.StatusProduto).HasDefaultValue(true);
-
-            entity.HasOne(d => d.Classificacao).WithMany(p => p.Produto)
-                .HasForeignKey(d => d.ClassificacaoID)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Produto_Classificacao");
-
-            entity.HasOne(d => d.Usuario).WithMany(p => p.Produto)
-                .HasForeignKey(d => d.UsuarioID)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Produto_Usuario");
-
-            entity.HasMany(d => d.Genero).WithMany(p => p.Produto)
-                .UsingEntity<Dictionary<string, object>>(
-                    "ProdutoGenero",
-                    r => r.HasOne<Genero>().WithMany()
-                        .HasForeignKey("GeneroID")
-                        .HasConstraintName("FK_ProdutoGenero_Genero"),
-                    l => l.HasOne<Produto>().WithMany()
-                        .HasForeignKey("ProdutoID")
-                        .HasConstraintName("FK_ProdutoGenero_Produto"),
-                    j =>
-                    {
-                        j.HasKey("ProdutoID", "GeneroID");
-                    });
-
-            entity.HasMany(d => d.Plataforma).WithMany(p => p.Produto)
-                .UsingEntity<Dictionary<string, object>>(
-                    "ProdutoPlataforma",
-                    r => r.HasOne<Plataforma>().WithMany()
-                        .HasForeignKey("PlataformaID")
-                        .HasConstraintName("FK_ProdutoPlataforma_Plataforma"),
-                    l => l.HasOne<Produto>().WithMany()
-                        .HasForeignKey("ProdutoID")
-                        .HasConstraintName("FK_ProdutoPlataforma_Produto"),
-                    j =>
-                    {
-                        j.HasKey("ProdutoID", "PlataformaID");
-                    });
+            entity.Property(e => e.DataExpiracao).HasColumnType("datetime");
+            entity.Property(e => e.Nome).HasMaxLength(100);
+            entity.Property(e => e.StatusPromocao).HasDefaultValue(true);
         });
 
         modelBuilder.Entity<Usuario>(entity =>
         {
-            entity.HasKey(e => e.UsuarioID).HasName("PK__Usuario__2B3DE7983C562456");
+            entity.HasKey(e => e.UsuarioId).HasName("PK__Usuario__2B3DE7B87F400314");
 
-            entity.ToTable(tb => tb.HasTrigger("trg_ExclusaoUsuario"));
+            entity.ToTable(tb => tb.HasTrigger("tgr_Usuario_UsuarioStatus"));
 
-            entity.HasIndex(e => e.Email, "UQ__Usuario__A9D10534FDA07277").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__Usuario__A9D10534F98832A6").IsUnique();
 
             entity.Property(e => e.Email)
                 .HasMaxLength(150)

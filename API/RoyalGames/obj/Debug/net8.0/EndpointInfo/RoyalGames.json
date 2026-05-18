@@ -221,6 +221,241 @@
         }
       }
     },
+    "/api/Jogo": {
+      "get": {
+        "tags": [
+          "Jogo"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LerJogoDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LerJogoDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LerJogoDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Jogo"
+        ],
+        "requestBody": {
+          "content": {
+            "Multipart/Form-Data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Nome": {
+                    "type": "string"
+                  },
+                  "Valor": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "Descricao": {
+                    "type": "string"
+                  },
+                  "Imagem": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "GeneroIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer",
+                      "format": "int32"
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "Nome": {
+                  "style": "form"
+                },
+                "Valor": {
+                  "style": "form"
+                },
+                "Descricao": {
+                  "style": "form"
+                },
+                "Imagem": {
+                  "style": "form"
+                },
+                "GeneroIds": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Jogo/{id}": {
+      "get": {
+        "tags": [
+          "Jogo"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LerJogoDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LerJogoDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LerJogoDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Jogo"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Jogo/(id)": {
+      "put": {
+        "tags": [
+          "Jogo"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Nome": {
+                    "type": "string"
+                  },
+                  "Valor": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "Descricao": {
+                    "type": "string"
+                  },
+                  "Imagem": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "CategoriaIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer",
+                      "format": "int32"
+                    }
+                  },
+                  "StatusJogo": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "encoding": {
+                "Nome": {
+                  "style": "form"
+                },
+                "Valor": {
+                  "style": "form"
+                },
+                "Descricao": {
+                  "style": "form"
+                },
+                "Imagem": {
+                  "style": "form"
+                },
+                "CategoriaIds": {
+                  "style": "form"
+                },
+                "StatusJogo": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Plataforma": {
       "get": {
         "tags": [
@@ -382,241 +617,6 @@
             }
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Produto": {
-      "get": {
-        "tags": [
-          "Produto"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/LerProdutoDto"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/LerProdutoDto"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/LerProdutoDto"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Produto"
-        ],
-        "requestBody": {
-          "content": {
-            "Multipart/Form-Data": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "Nome": {
-                    "type": "string"
-                  },
-                  "Preco": {
-                    "type": "number",
-                    "format": "double"
-                  },
-                  "Descricao": {
-                    "type": "string"
-                  },
-                  "Imagem": {
-                    "type": "string",
-                    "format": "binary"
-                  },
-                  "GeneroIds": {
-                    "type": "array",
-                    "items": {
-                      "type": "integer",
-                      "format": "int32"
-                    }
-                  }
-                }
-              },
-              "encoding": {
-                "Nome": {
-                  "style": "form"
-                },
-                "Preco": {
-                  "style": "form"
-                },
-                "Descricao": {
-                  "style": "form"
-                },
-                "Imagem": {
-                  "style": "form"
-                },
-                "GeneroIds": {
-                  "style": "form"
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Produto/{id}": {
-      "get": {
-        "tags": [
-          "Produto"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/LerProdutoDto"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LerProdutoDto"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LerProdutoDto"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Produto"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Produto/(id)": {
-      "put": {
-        "tags": [
-          "Produto"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "Nome": {
-                    "type": "string"
-                  },
-                  "Preco": {
-                    "type": "number",
-                    "format": "double"
-                  },
-                  "Descricao": {
-                    "type": "string"
-                  },
-                  "Imagem": {
-                    "type": "string",
-                    "format": "binary"
-                  },
-                  "CategoriaIds": {
-                    "type": "array",
-                    "items": {
-                      "type": "integer",
-                      "format": "int32"
-                    }
-                  },
-                  "StatusProduto": {
-                    "type": "boolean"
-                  }
-                }
-              },
-              "encoding": {
-                "Nome": {
-                  "style": "form"
-                },
-                "Preco": {
-                  "style": "form"
-                },
-                "Descricao": {
-                  "style": "form"
-                },
-                "Imagem": {
-                  "style": "form"
-                },
-                "CategoriaIds": {
-                  "style": "form"
-                },
-                "StatusProduto": {
-                  "style": "form"
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "OK"
@@ -909,7 +909,7 @@
       "LerGeneroDto": {
         "type": "object",
         "properties": {
-          "generoID": {
+          "generoId": {
             "type": "integer",
             "format": "int32"
           },
@@ -920,24 +920,10 @@
         },
         "additionalProperties": false
       },
-      "LerPlataformaDto": {
+      "LerJogoDto": {
         "type": "object",
         "properties": {
-          "plataformaID": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nome": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "LerProdutoDto": {
-        "type": "object",
-        "properties": {
-          "produtoID": {
+          "jogoId": {
             "type": "integer",
             "format": "int32"
           },
@@ -945,7 +931,7 @@
             "type": "string",
             "nullable": true
           },
-          "preco": {
+          "valor": {
             "type": "number",
             "format": "double"
           },
@@ -953,7 +939,7 @@
             "type": "string",
             "nullable": true
           },
-          "statusProduto": {
+          "statusJogo": {
             "type": "boolean",
             "nullable": true
           },
@@ -971,17 +957,18 @@
               "type": "string"
             },
             "nullable": true
-          },
-          "usuarioID": {
+          }
+        },
+        "additionalProperties": false
+      },
+      "LerPlataformaDto": {
+        "type": "object",
+        "properties": {
+          "plataformaId": {
             "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
-          "usuarioNome": {
-            "type": "string",
-            "nullable": true
-          },
-          "usuarioEmail": {
+          "nome": {
             "type": "string",
             "nullable": true
           }
@@ -991,7 +978,7 @@
       "LerUsuarioDto": {
         "type": "object",
         "properties": {
-          "usuarioID": {
+          "usuarioId": {
             "type": "integer",
             "format": "int32"
           },

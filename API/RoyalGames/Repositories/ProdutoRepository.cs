@@ -5,97 +5,99 @@ using RoyalGames.Interfaces;
 
 namespace RoyalGames.Repositories
 {
-    public class ProdutoRepository : IProdutoRepository
+    public class JogoRepository : IJogoRepository
     {
         private readonly RoyalGamesContext _context;
-        public ProdutoRepository(RoyalGamesContext context)
+        public JogoRepository(RoyalGamesContext context)
         {
             _context = context;
         }
 
-        public List<Produto> Listar()
+        public List<Jogo> Listar()
         {
-            List<Produto> produtos = _context.Produto
+            List<Jogo> jogos = _context.Jogo
+                .Include(p => p.JogoPromocao)
+                .Include(p => p.Log_AlteracaoJogo)
                 .Include(p => p.Genero)
-                .Include(p => p.Usuario)
+                .Include(p => p.Plataforma)
+                .OrderBy(p => p.JogoId)
                 .ToList();
 
-            return produtos;
+            return jogos;
         }
 
-        public Produto ObterPorId(int id)
+        public Jogo ObterPorId(int id)
         {
-            Produto? produto = _context.Produto
+            Jogo? jogo = _context.Jogo
                 .Include(p => p.Genero)
-                .Include(p => p.Usuario)
-                .FirstOrDefault(p => p.ProdutoID == id);
+                .FirstOrDefault(p => p.JogoId == id);
 
-            return produto;
+            return jogo;
         }
 
-        public bool NomeExiste(string nome, int? produtoIdAtual = null)
+        public bool NomeExiste(string nome, int? JogoIdAtual = null)
         {
-            var produtoBanco = _context.Produto.AsQueryable();
+            var jogoBanco = _context.Jogo.AsQueryable();
 
-            if(produtoIdAtual.HasValue)
-                produtoBanco = produtoBanco.Where(p => p.ProdutoID != produtoIdAtual.Value);
+            if(JogoIdAtual.HasValue)
+                jogoBanco = jogoBanco.Where(p => p.JogoId != JogoIdAtual.Value);
 
-            return produtoBanco.Any(p => p.Nome == nome);
+            return jogoBanco.Any(p => p.Nome == nome);
         }
 
         public byte[] ObterImagem(int id)
         {
-            var imagemProduto = _context.Produto
-                .Where(p => p.ProdutoID == id)
+            var imagemJogo = _context.Jogo
+                .Where(p => p.JogoId == id)
                 .Select(p => p.Imagem)
                 .FirstOrDefault();
 
-            return imagemProduto;
+            return imagemJogo;
         }
 
-        public void Adicionar(Produto produto, List<int> generoIds)
+        public void Adicionar(Jogo jogo, List<int> generoIds)
         {
             // Busca e guarda em generos, todas as categorias cujo o id foi chamado.
             List<Genero> generos = _context.Genero
-                .Where(g => generoIds.Contains(g.GeneroID))
+                .Where(g => generoIds.Contains(g.GeneroId))
                 .ToList();
 
-            produto.Genero = generos;
+            jogo.Genero = generos;
 
-            _context.Add(produto);
+            _context.Add(jogo);
             _context.SaveChanges();
         }
 
-        public void Atualizar(Produto produto, List<int> generoIds)
+        public void Atualizar(Jogo jogo, List<int> generoIds)
         {
-            Produto? produtoBanco = _context.Produto
+            Jogo? jogoBanco = _context.Jogo
                 .Include(p => p.Genero)
-                .FirstOrDefault(p => p.ProdutoID == produto.ProdutoID);
+                .FirstOrDefault(j => j.JogoId == j.JogoId);
 
-            if (produtoBanco == null)
+            if (jogoBanco == null)
                 return;
 
-            produtoBanco.Nome = produto.Nome;
-            produtoBanco.Preco = produto.Preco;
-            produtoBanco.Descricao = produto.Descricao; 
+            jogoBanco.Nome = jogo.Nome;
+            jogoBanco.Valor = jogo.Valor;
+            jogoBanco.Descricao = jogo.Descricao; 
 
-            if(produto.Imagem != null)
-                produtoBanco.Imagem = produto.Imagem;
+            if(jogo.Imagem != null)
+                jogoBanco.Imagem = jogo.Imagem;
 
-            if(produto.StatusProduto.HasValue)
-                produtoBanco.StatusProduto = produto.StatusProduto.Value;
+            if(jogo.StatusJogo)
+                jogoBanco.StatusJogo = jogo.StatusJogo;
 
             // Busca e guarda em generos, todas as categorias cujo o id foi chamado.
             var generos = _context.Genero
-                .Where(g => generoIds.Contains(g.GeneroID))
+                .Where(g => generoIds.Contains(g.GeneroId))
                 .ToList();
 
             // Remover as com categorias atuais ligações atuais 
-            produtoBanco.Genero.Clear();
+            jogoBanco.Genero.Clear();
 
             foreach(var genero in generos)
             {
-                produtoBanco.Genero.Add(genero);
+                jogoBanco.Genero.Add(genero);
             }
 
             _context.SaveChanges();
@@ -103,11 +105,11 @@ namespace RoyalGames.Repositories
 
         public void Remover(int id)
         {
-            Produto produtoRemovido = _context.Produto.FirstOrDefault(p => p.ProdutoID == id);
-            if (produtoRemovido == null)
+            Jogo jogoRemovido = _context.Jogo.FirstOrDefault(j => j.JogoId == id);
+            if (jogoRemovido == null)
                 return;
 
-            _context.Remove(produtoRemovido);
+            _context.Remove(jogoRemovido);
             _context.SaveChanges();
         }
     }

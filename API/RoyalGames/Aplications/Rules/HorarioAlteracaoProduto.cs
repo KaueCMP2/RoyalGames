@@ -2,7 +2,7 @@
 
 namespace VHBurger.Aplications.Rules
 {
-    public class HorarioAlteracaoProduto
+    public class HorarioAlteracaoJogo
     {
         public static void ValidarHorario()
         {
@@ -16,7 +16,7 @@ namespace VHBurger.Aplications.Rules
             //se retornar true
             if (estaAberto)
             {
-                throw new DomainException("Produto só pode ser alterado fora do horário de funcionamento!");
+                throw new DomainException("Jogo só pode ser alterado fora do horário de funcionamento!");
             }
         }
     }

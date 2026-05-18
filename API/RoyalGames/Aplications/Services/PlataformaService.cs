@@ -30,7 +30,7 @@ namespace RoyalGames.Aplications.Services
             // Converte a lista de plataformas em lista de DTO.
             List<LerPlataformaDto> plataformaDto = plataformas.Select(p => new LerPlataformaDto
             {
-                PlataformaID = p.PlataformaID,
+                PlataformaId = p.PlataformaId,
                 Nome = p.Nome
             }).ToList();
 
@@ -53,7 +53,7 @@ namespace RoyalGames.Aplications.Services
             // Converte a plataforma para DTO de leitura.
             LerPlataformaDto PlataformaDto = new LerPlataformaDto
             {
-                PlataformaID = plataforma.PlataformaID,
+                PlataformaId = plataforma.PlataformaId,
                 Nome = plataforma.Nome
             };
 

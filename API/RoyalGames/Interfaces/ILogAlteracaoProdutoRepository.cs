@@ -1,6 +1,6 @@
 ﻿namespace RoyalGames.Interfaces
 {
-    public interface ILogAlteracaoProdutoRepository
+    public interface ILogAlteracaoJogoRepository
     {
     }
 }

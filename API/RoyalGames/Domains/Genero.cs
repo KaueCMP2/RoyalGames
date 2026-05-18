@@ -5,9 +5,9 @@ namespace RoyalGames.Domains;
 
 public partial class Genero
 {
-    public int GeneroID { get; set; }
+    public int GeneroId { get; set; }
 
     public string Nome { get; set; } = null!;
 
-    public virtual ICollection<Produto> Produto { get; set; } = new List<Produto>();
+    public virtual ICollection<Jogo> Jogo { get; set; } = new List<Jogo>();
 }

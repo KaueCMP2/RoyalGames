@@ -1,6 +1,6 @@
-﻿namespace RoyalGames.DTOs.LogProdutoDto
+﻿namespace RoyalGames.DTOs.LogJogoDto
 {
-    public class LerLogProdutoDto
+    public class LerLogJogoDto
     {
     }
 }

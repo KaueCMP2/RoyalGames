@@ -1,27 +1,22 @@
 ﻿using RoyalGames.Domains;
-using RoyalGames.DTOs.ProdutoDto;
+using RoyalGames.DTOs.JogoDto;
 
 namespace RoyalGames.Aplications.Conversions
 {
-    public class ProdutoParaDto
+    public class JogoParaDto
     {
-        public static LerProdutoDto ConverterParaDto(Produto produto)
+        public static LerJogoDto ConverterParaDto(Jogo jogo)
         {
-            return new LerProdutoDto
+            return new LerJogoDto
             {
-                ProdutoID = produto.ProdutoID,
-                Nome = produto.Nome,
-                Preco = produto.Preco,
-                Descricao = produto.Descricao,
-                StatusProduto = produto.StatusProduto,
+                JogoId = jogo.JogoId,
+                Nome = jogo.Nome,
+                Valor = jogo.Valor,
+                Descricao = jogo.Descricao,
+                StatusJogo = jogo.StatusJogo,
 
-                GeneroIds = produto.Genero.Select(categoria => categoria.GeneroID).ToList(),
-
-                Generos = produto.Genero.Select(categoria => categoria.Nome).ToList(),
-
-                UsuarioID = produto.UsuarioID,
-                UsuarioNome = produto.Usuario?.Nome,
-                UsuarioEmail = produto.Usuario?.Email
+                GeneroIds = jogo.Genero.Select(categoria => categoria.GeneroId).ToList(),
+                Generos = jogo.Genero.Select(categoria => categoria.Nome).ToList(),
             };
         }
     }

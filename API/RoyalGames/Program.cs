@@ -48,9 +48,13 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddDbContext<RoyalGamesContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Produto
-builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
-builder.Services.AddScoped<ProdutoService>();
+// Jogo
+builder.Services.AddScoped<IJogoRepository, JogoRepository>();
+builder.Services.AddScoped<JogoService>();
+
+// Genero
+builder.Services.AddScoped<IGeneroRepository, GeneroRepository>();
+builder.Services.AddScoped<GeneroService>();
 
 //Plataforma
 builder.Services.AddScoped<IPlataformaRepository, PlataformaRepository>();

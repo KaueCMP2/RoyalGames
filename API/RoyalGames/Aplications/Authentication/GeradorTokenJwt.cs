@@ -46,7 +46,7 @@ namespace RoyalGames.Aplications.Authentication
             // Informações que futuramente podem ser recuperadas na api, para saber quem esta logado
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.NameIdentifier, usuario.UsuarioID.ToString()),
+                new Claim(ClaimTypes.NameIdentifier, usuario.UsuarioId.ToString()),
                 new Claim(ClaimTypes.Name, usuario.Nome),
                 new Claim(ClaimTypes.Email, usuario.Email),
             };

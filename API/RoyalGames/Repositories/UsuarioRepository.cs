@@ -15,7 +15,7 @@ namespace RoyalGames.Repositories
 
         public List<Usuario> Listar()
         {
-            return _context.Usuario.OrderBy(u => u.UsuarioID).ToList();
+            return _context.Usuario.OrderBy(u => u.UsuarioId).ToList();
         }
 
         public Usuario? ObterPorId(int id)
@@ -41,7 +41,7 @@ namespace RoyalGames.Repositories
 
         public void Atualizar(Usuario usuario)
         {
-            var usuarioBanco = _context.Usuario.FirstOrDefault(ua => ua.UsuarioID == usuario.UsuarioID);
+            var usuarioBanco = _context.Usuario.FirstOrDefault(ua => ua.UsuarioId == usuario.UsuarioId);
             if (usuarioBanco == null)
                 return;
 

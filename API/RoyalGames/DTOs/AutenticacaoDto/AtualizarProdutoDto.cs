@@ -1,6 +1,6 @@
 ﻿namespace RoyalGames.DTOs.AutenticacaoDto
 {
-    public class AtualizarProdutoDto
+    public class AtualizarJogoDto
     {
     }
 }

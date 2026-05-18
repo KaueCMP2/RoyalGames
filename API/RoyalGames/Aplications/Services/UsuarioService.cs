@@ -24,7 +24,7 @@ namespace RoyalGames.Aplications.Services
         {
             LerUsuarioDto lerUsuario = new LerUsuarioDto
             {
-                UsuarioID = usuario.UsuarioID,
+                UsuarioId = usuario.UsuarioId,
                 Nome = usuario.Nome,
                 Email = usuario.Email,
                 StatusUsuario = usuario.StatusUsuario
@@ -115,7 +115,7 @@ namespace RoyalGames.Aplications.Services
 
             Usuario usuarioComMesmoEmail = _repository.ObterPorEmail(usuarioDto.Email);
 
-            if (usuarioComMesmoEmail != null && usuarioComMesmoEmail.UsuarioID != id)
+            if (usuarioComMesmoEmail != null && usuarioComMesmoEmail.UsuarioId != id)
                 throw new DomainException("Já existe um usuário com este e-mail.");
 
             usuarioBanco.Nome = usuarioDto.Nome;

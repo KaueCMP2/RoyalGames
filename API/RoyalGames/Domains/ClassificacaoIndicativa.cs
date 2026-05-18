@@ -5,9 +5,9 @@ namespace RoyalGames.Domains;
 
 public partial class ClassificacaoIndicativa
 {
-    public int ClassificacaoID { get; set; }
+    public int ClassificacaoId { get; set; }
 
-    public string Nome { get; set; } = null!;
+    public string ClassificacaoNome { get; set; } = null!;
 
-    public virtual ICollection<Produto> Produto { get; set; } = new List<Produto>();
+    public virtual ICollection<Jogo> Jogo { get; set; } = new List<Jogo>();
 }

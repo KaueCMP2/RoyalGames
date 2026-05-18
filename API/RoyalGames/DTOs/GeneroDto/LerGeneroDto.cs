@@ -2,7 +2,7 @@
 {
     public class LerGeneroDto
     {
-        public int GeneroID { get; set; }
+        public int GeneroId { get; set; }
         public string Nome { get; set; } = null!;
     }
 }
