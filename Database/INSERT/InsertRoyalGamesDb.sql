@@ -1,7 +1,14 @@
-INSERT INTO Usuario (Nome, Email, Senha, StatusUsuario)
-VALUES
-('Joca Souza', 'jocasouza@email.com', HASHBYTES('SHA-512', 'joca123'), 1)
+USE RoyalGames
 GO
+
+INSERT INTO Usuario (Nome, Email, Senha)
+VALUES
+('Joca Souza', 'jocasouza@email.com', HASHBYTES('SHA2_256', 'joca123')),
+('Carlos Lima', 'carlos@vhburguer.com', HASHBYTES('SHA2_256', 'admin@123')),
+('Kaue Sergio', 'kaue@email.com', HASHBYTES('SHA2_256', '12345678'))
+GO
+
+SELECT * FROM Usuario
 
 INSERT INTO ClassificacaoIndicativa (ClassificacaoNome)
 VALUES
@@ -13,10 +20,10 @@ VALUES
 ('+18')
 GO
 
-INSERT INTO Jogo (Nome, ClassificacaoId, Descricao, Descricao, Imagem, Valor, StatusJogo)
+INSERT INTO Jogo (Nome, ClassificacaoId, Descricao, Imagem, Valor, StatusJogo)
 VALUES
-(1, 'Minecraft', 'jogo mundo aberto', CONVERT(varbinary(max), 'foto mine'), 19.00, 1),
-(4, 'Mario', 'jogo de aventura muito famoso', CONVERT(varbinary(max), 'foto mario'), 10.00, 1)
+('Minecraft', 1, 'jogo mundo aberto', CONVERT(varbinary(max), 'foto mine'), 19.00, 1),
+('Mario', 1, 'jogo de aventura muito famoso', CONVERT(varbinary(max), 'foto mario'), 10.00, 1)
 GO
 
 INSERT INTO Promocao (Nome, DataExpiracao, StatusPromocao)

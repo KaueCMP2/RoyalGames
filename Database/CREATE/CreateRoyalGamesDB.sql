@@ -10,7 +10,7 @@ CREATE TABLE Usuario
 UsuarioId INT IDENTITY PRIMARY KEY,
 Nome VARCHAR (60) NOT NULL,
 Email VARCHAR (150) NOT NULL UNIQUE,
-Senha VARBINARY (MAX) NOT NULL,
+Senha VARBINARY (32),
 StatusUsuario BIT DEFAULT 1 NOT NULL
 )
 GO
@@ -60,8 +60,9 @@ CREATE TABLE JogoPromocao
 PromocaoId INT NOT NULL,
 JogoId INT NOT NULL,
 Valor DECIMAL,
+
 CONSTRAINT PK_JogoPromocao_JogoId_PromocaoId PRIMARY KEY (PromocaoId, JogoId), 
-CONSTRAINT FK_JogoPromocao_JogoId FOREIGN KEY (JogoId) REFERENCES Jogo (JogoId),
+CONSTRAINT FK_JogoPromocao_Jogo_JogoId FOREIGN KEY (JogoId) REFERENCES Jogo (JogoId),
 CONSTRAINT FK_JogoPromocao_Promocao_PromocaoId FOREIGN KEY (PromocaoId) REFERENCES Promocao (PromocaoId)
 )
 GO
@@ -79,7 +80,7 @@ JogoId INT NOT NULL,
 PlataformaId INT NOT NULL,
 CONSTRAINT PK_JogoPlataforma_JogoId_PlataformaId PRIMARY KEY (JogoId, PlataformaId),
 CONSTRAINT FK_JogoPlataforma_Jogo_JogoId FOREIGN KEY (JogoId) REFERENCES Jogo (JogoId),
-CONSTRAINT FK_JogoPlataforma_Plataforma_PlataformaId FOREIGN KEY (PlataformaId) REFERENCES Jogo (JogoId)
+CONSTRAINT FK_JogoPlataforma_Plataforma_PlataformaId FOREIGN KEY (PlataformaId) REFERENCES Plataforma (PlataformaId)
 
 )
 GO
