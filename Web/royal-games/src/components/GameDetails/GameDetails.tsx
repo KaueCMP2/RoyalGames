@@ -1,28 +1,37 @@
 import React from 'react'
 import styles from '@/components/GameDetails/GameDetails.module.css'
+import formatarValor from '@/utils/formatacao';
+import FormatarValor from '@/utils/formatacao';
 
-const GameDetails = () => {
+type JogoRecebido = {
+  jogoId: number,
+  imgUrl: string,
+  nome: string,
+  descricao: string,
+  plataformaIds: number[],
+  generoIds: number[]
+  classificacaoId: number;
+  valor: number,
+}
+
+const GameDetails = (jogo: JogoRecebido) => {
   return (
     <main id={styles.main}>
       <div id={styles.content_main} className='layout-grid'>
         <h1>Detalhes do jogo</h1>
         <div id={styles.container_game_details}>
           <div id={styles.content_game_details1}>
-            <img src="../game-cover/lol.png" alt="" />
+            <img src={jogo.imgUrl} alt="" />
             <div id={styles.container_info}>
               <article id={styles.game_article}>
-                <h2>League of legends</h2>
-                <p>League of Legends (LoL) é um jogo eletrônico do gênero MOBA (Multiplayer Online Battle Arena) onde duas equipes de cinco jogadores competem entre si com o objetivo de destruir a base adversária. Cada jogador controla um campeão com habilidades únicas, exigindo estratégia, trabalho em equipe e tomada de decisões rápidas durante as partidas.
-                  <br />
-                  <br />
-                  O jogo possui diversos modos, mapas e estilos de jogo, além de oferecer atualizações frequentes com novos personagens, eventos e ajustes de balanceamento. League of Legends é conhecido pelo seu cenário competitivo mundial, reunindo milhões de jogadores e campeonatos profissionais ao redor do mundo.</p>
+                <h2>{jogo.nome}</h2>
+                <p>{jogo.descricao}</p>
               </article>
               <div id={styles.game_details}>
-                <p><span>Classificação indicativa:</span> 18 anos</p>
-                <p><span>Preço:</span> R$100,00</p>
-                <p><span>Plataformas:</span></p>
-                <p><span>Categorias:</span></p>
-                <p><span>Genero:</span></p>
+                <p><span>Classificação indicativa:</span> {jogo.classificacaoId}</p>
+                <p><span>Preço:</span>{FormatarValor(jogo.valor)}</p>
+                <p><span>Plataformas:</span>{jogo.plataformaIds}</p>
+                <p><span>Genero:</span>{jogo.generoIds}</p>
               </div>
             </div>
           </div>

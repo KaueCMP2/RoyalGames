@@ -17,7 +17,9 @@ interface JogoListagem {
     descricao: string,
     statusJogo: boolean,
     imgUrl: string,
-    generoIds: number[],
+    plataformaIds: number[],
+    classificacaoId: number;
+    generoIds: number[]
 }
 
 export async function listarJogos() {
@@ -31,7 +33,7 @@ export async function listarJogos() {
             imgUrl: `${api.defaults.baseURL}${jogo.imgUrl}`
         }))
 
-        jogos.forEach(jogo => {
+        jogos.forEach((jogo: any) => {
             console.log(jogo)
         });
 
