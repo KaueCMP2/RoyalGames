@@ -60,8 +60,24 @@ namespace RoyalGames.Controllers
 
             return Ok(jogo);
         }
+
+        [HttpGet("jogo/{id}/imagem")]
+        public ActionResult obterImagem(int id)
+        {
+            var imagem = _service.ObterImagem(id);
+
+            if (imagem == null)
+            {
+                //return StatusCode(404);
+                return NotFound();
+            }
+
+            return Ok(imagem);
+        }
+
+
         [HttpPost]
-        [Consumes("Multipart/Form-Data")] // Indica que recebe dados no formato multpart/from-data
+        [Consumes("multipart/form-data")] // Indica que recebe dados no formato multpart/from-data
         [Authorize] // exige login para adicionar Jogos
         public IActionResult Adicionar([FromForm] CriarJogoDto JogoDTO)
         {
@@ -80,7 +96,7 @@ namespace RoyalGames.Controllers
             }
         }
 
-        [HttpPut("(id)")]
+        [HttpPut("{id}")]
         [Authorize]
         public IActionResult Atualizar(int id, [FromForm] AtualizarJogoDto jogoDTO)
         {

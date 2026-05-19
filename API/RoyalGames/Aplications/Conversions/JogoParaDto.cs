@@ -14,6 +14,7 @@ namespace RoyalGames.Aplications.Conversions
                 Valor = jogo.Valor,
                 Descricao = jogo.Descricao,
                 StatusJogo = jogo.StatusJogo,
+                ImgUrl = $"jogo/{jogo.JogoId}/imagem",
 
                 GeneroIds = jogo.Genero.Select(categoria => categoria.GeneroId).ToList(),
                 Generos = jogo.Genero.Select(categoria => categoria.Nome).ToList(),

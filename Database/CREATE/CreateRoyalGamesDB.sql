@@ -31,7 +31,8 @@ Valor DECIMAL (10, 2) NOT NULL,
 Imagem VARBINARY (MAX) NOT NULL,
 StatusJogo BIT DEFAULT 1 NOT NULL,
 ClassificacaoId INT NOT NULL,
-CONSTRAINT FK_Jogo_ClassificacaoId FOREIGN KEY (ClassificacaoId) REFERENCES ClassificacaoIndicativa 
+
+CONSTRAINT FK_Jogo_ClassificacaoId FOREIGN KEY (ClassificacaoId) REFERENCES ClassificacaoIndicativa (ClassificacaoId)
 )
 GO
 
@@ -45,6 +46,8 @@ JogoId INT NOT NULL,
 CONSTRAINT FK_Log_Alteracao_JogoId FOREIGN KEY (JogoId) REFERENCES Jogo (JogoId)
 )
 GO
+
+select * from Usuario
 
 CREATE TABLE Promocao
 (

@@ -12,6 +12,8 @@
 
         public List<int> CategoriaIds { get; set; } = new();
 
+        public int ClassificacaoIndicativaId { get; set; }
+
         public bool? StatusJogo { get; set; }
     }
 }

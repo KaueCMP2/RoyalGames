@@ -34,13 +34,13 @@ public partial class RoyalGamesContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS; Database=RoyalGames; Trusted_Connection=true; TrustServerCertificate=true");
+        => optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=RoyalGames;Trusted_Connection=true;TrustServerCertificate=true");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<ClassificacaoIndicativa>(entity =>
         {
-            entity.HasKey(e => e.ClassificacaoId).HasName("PK__Classifi__D1D088CEDD299ADF");
+            entity.HasKey(e => e.ClassificacaoId).HasName("PK__Classifi__D1D088CEA9413CC7");
 
             entity.Property(e => e.ClassificacaoNome)
                 .HasMaxLength(15)
@@ -49,9 +49,9 @@ public partial class RoyalGamesContext : DbContext
 
         modelBuilder.Entity<Genero>(entity =>
         {
-            entity.HasKey(e => e.GeneroId).HasName("PK__Genero__A99D024853EB48ED");
+            entity.HasKey(e => e.GeneroId).HasName("PK__Genero__A99D02483A9ADB3E");
 
-            entity.HasIndex(e => e.Nome, "UQ__Genero__7D8FE3B2A178A2EC").IsUnique();
+            entity.HasIndex(e => e.Nome, "UQ__Genero__7D8FE3B232741EC6").IsUnique();
 
             entity.Property(e => e.Nome)
                 .HasMaxLength(20)
@@ -60,7 +60,7 @@ public partial class RoyalGamesContext : DbContext
 
         modelBuilder.Entity<Jogo>(entity =>
         {
-            entity.HasKey(e => e.JogoId).HasName("PK__Jogo__59196835FC806CAE");
+            entity.HasKey(e => e.JogoId).HasName("PK__Jogo__591968356CB7EBA5");
 
             entity.ToTable(tb =>
                 {
@@ -68,7 +68,7 @@ public partial class RoyalGamesContext : DbContext
                     tb.HasTrigger("tgr_Jogo_StatusJogo");
                 });
 
-            entity.HasIndex(e => e.Nome, "UQ__Jogo__7D8FE3B2736BC68C").IsUnique();
+            entity.HasIndex(e => e.Nome, "UQ__Jogo__7D8FE3B2B7F6646A").IsUnique();
 
             entity.Property(e => e.Nome).HasMaxLength(100);
             entity.Property(e => e.StatusJogo).HasDefaultValue(true);
@@ -125,7 +125,7 @@ public partial class RoyalGamesContext : DbContext
 
         modelBuilder.Entity<Log_AlteracaoJogo>(entity =>
         {
-            entity.HasKey(e => e.Log_AlteracaoJogoId).HasName("PK__Log_Alte__BB9D2C6FEC742C7E");
+            entity.HasKey(e => e.Log_AlteracaoJogoId).HasName("PK__Log_Alte__BB9D2C6F50735A26");
 
             entity.Property(e => e.DataAlteracao).HasColumnType("datetime");
             entity.Property(e => e.NomeAnterior).HasMaxLength(100);
@@ -139,9 +139,9 @@ public partial class RoyalGamesContext : DbContext
 
         modelBuilder.Entity<Plataforma>(entity =>
         {
-            entity.HasKey(e => e.PlataformaId).HasName("PK__Platafor__B83567ED1688B8E4");
+            entity.HasKey(e => e.PlataformaId).HasName("PK__Platafor__B83567ED83A2EC5C");
 
-            entity.HasIndex(e => e.Nome, "UQ__Platafor__7D8FE3B296F494EF").IsUnique();
+            entity.HasIndex(e => e.Nome, "UQ__Platafor__7D8FE3B2481FAB74").IsUnique();
 
             entity.Property(e => e.Nome)
                 .HasMaxLength(20)
@@ -150,7 +150,7 @@ public partial class RoyalGamesContext : DbContext
 
         modelBuilder.Entity<Promocao>(entity =>
         {
-            entity.HasKey(e => e.PromocaoId).HasName("PK__Promocao__254B581D336BBDA0");
+            entity.HasKey(e => e.PromocaoId).HasName("PK__Promocao__254B581DD10D83EB");
 
             entity.Property(e => e.DataExpiracao).HasColumnType("datetime");
             entity.Property(e => e.Nome).HasMaxLength(100);
@@ -159,11 +159,11 @@ public partial class RoyalGamesContext : DbContext
 
         modelBuilder.Entity<Usuario>(entity =>
         {
-            entity.HasKey(e => e.UsuarioId).HasName("PK__Usuario__2B3DE7B87F400314");
+            entity.HasKey(e => e.UsuarioId).HasName("PK__Usuario__2B3DE7B8BB2B00C9");
 
             entity.ToTable(tb => tb.HasTrigger("tgr_Usuario_UsuarioStatus"));
 
-            entity.HasIndex(e => e.Email, "UQ__Usuario__A9D10534F98832A6").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__Usuario__A9D105345A335965").IsUnique();
 
             entity.Property(e => e.Email)
                 .HasMaxLength(150)

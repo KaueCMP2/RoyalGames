@@ -11,5 +11,6 @@
         public IFormFile Imagem { get; set; } = null!; // A imagem vem via multipart/form-data, ideal para upload de arquivo
 
         public List<int> GeneroIds { get; set; } = new();
+        public int ClassificacaoIndicativaId { get; set; } = new();
     }
 }

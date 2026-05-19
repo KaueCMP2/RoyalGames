@@ -264,7 +264,7 @@
         ],
         "requestBody": {
           "content": {
-            "Multipart/Form-Data": {
+            "multipart/form-data": {
               "schema": {
                 "type": "object",
                 "properties": {
@@ -288,6 +288,10 @@
                       "type": "integer",
                       "format": "int32"
                     }
+                  },
+                  "ClassificacaoIndicativaId": {
+                    "type": "integer",
+                    "format": "int32"
                   }
                 }
               },
@@ -305,6 +309,9 @@
                   "style": "form"
                 },
                 "GeneroIds": {
+                  "style": "form"
+                },
+                "ClassificacaoIndicativaId": {
                   "style": "form"
                 }
               }
@@ -357,7 +364,7 @@
           }
         }
       },
-      "delete": {
+      "put": {
         "tags": [
           "Jogo"
         ],
@@ -366,28 +373,6 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Jogo/(id)": {
-      "put": {
-        "tags": [
-          "Jogo"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "query",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -421,6 +406,10 @@
                       "format": "int32"
                     }
                   },
+                  "ClassificacaoIndicativaId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
                   "StatusJogo": {
                     "type": "boolean"
                   }
@@ -442,6 +431,9 @@
                 "CategoriaIds": {
                   "style": "form"
                 },
+                "ClassificacaoIndicativaId": {
+                  "style": "form"
+                },
                 "StatusJogo": {
                   "style": "form"
                 }
@@ -449,6 +441,50 @@
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Jogo"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Jogo/jogo/{id}/imagem": {
+      "get": {
+        "tags": [
+          "Jogo"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -943,6 +979,10 @@
             "type": "boolean",
             "nullable": true
           },
+          "imgUrl": {
+            "type": "string",
+            "nullable": true
+          },
           "generoIds": {
             "type": "array",
             "items": {
@@ -957,6 +997,10 @@
               "type": "string"
             },
             "nullable": true
+          },
+          "classificacaoIndicativaId": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false

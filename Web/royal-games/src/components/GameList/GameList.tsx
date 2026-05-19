@@ -6,26 +6,33 @@ import { trackAllowedDynamicAccess } from 'next/dist/server/app-render/dynamic-r
 
 type Jogo = {
     jogoId: number,
-    imgUrl: string,
     nome: string,
+    valor: number,
     descricao: string,
-    preco: number
+    statusJogo: boolean,
+    generoIds: string[],
+    imgUrl: string,
 }
+
 
 const GameList = () => {
     const [jogos, SetJogos] = useState<Jogo[]>([]);
+
+    
     async function Listar() {
         try {
             const lista = await listarJogos();
             SetJogos(lista);
         } catch (error: any) {
-            console.log(error.message);
+            console.error(error.message);
         }
     }
-
+    
+    console.log(jogos)
+    
     useEffect(() => {
         Listar();
-    },)
+    }, [])
 
     return (
         <section id='game_list' className={styles.game_list}>
@@ -45,10 +52,10 @@ const GameList = () => {
                     <CardGame
                         key={item.jogoId}
                         jogoId={item.jogoId}
-                        imgUrl={item.imgUrl}
                         nome={item.nome}
+                        imgUrl={item.imgUrl}
                         descricao={item.descricao}
-                        preco={item.preco}
+                        preco={item.valor}
                     />
                 )) : (
                     <p>Carregando produtos...</p>

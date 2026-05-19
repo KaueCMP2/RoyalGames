@@ -1,39 +1,45 @@
 import { api } from "./apiService"
 
-type JogoPost = {
+type JogoFormulario = {
     jogoId: number,
-    img: File | null,
     nome: string,
+    valor: number,
     descricao: string,
-    preco: number,
     statusJogo: boolean,
-    generoIds: string[],
+    imgUrl: string,
+    generoIds: number[],
 }
 
 interface JogoListagem {
     jogoId: number,
-    img: File | null,
     nome: string,
+    valor: number,
     descricao: string,
-    preco: number,
     statusJogo: boolean,
-    generoIds: string[],
+    imgUrl: string,
+    generoIds: number[],
 }
 
 export async function listarJogos() {
     try {
-        const response = await api.get("Produto")
+        const response = await api.get("Jogo")
+
         const jogos = response.data.map((jogo: JogoListagem) => ({
             ...jogo,
-            ImageUrl: `${api.defaults.baseURL} ${jogo.img}`
+            ImageUrl: `${api.defaults.baseURL}${jogo.imgUrl}`
         }))
 
-        const produtosAtivos = jogos.data.filter(
-            (jogo: JogoListagem) => jogo.statusJogo = true
+        jogos.forEach(jogo => {
+            console.log(jogo)
+        });
+
+        let produtosAtivos = jogos.filter(
+            ((j: JogoListagem) => j.statusJogo = true)
+
         )
 
-        return jogos;
-    } catch (error : any) {
+        return produtosAtivos;
+    } catch (error: any) {
         throw new Error(error.response.data);
     }
 }

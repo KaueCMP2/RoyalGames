@@ -4399,23 +4399,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\KaueCMP2\\.nuget\\packages\\": {},
+    "C:\\Users\\23969368839\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\KaueCMP2\\Documents\\Projetos\\RoyalGames\\API\\RoyalGames\\RoyalGames.csproj",
+      "projectUniqueName": "C:\\Users\\23969368839\\Documents\\RoyalGames\\API\\RoyalGames\\RoyalGames.csproj",
       "projectName": "RoyalGames",
-      "projectPath": "C:\\Users\\KaueCMP2\\Documents\\Projetos\\RoyalGames\\API\\RoyalGames\\RoyalGames.csproj",
-      "packagesPath": "C:\\Users\\KaueCMP2\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\KaueCMP2\\Documents\\Projetos\\RoyalGames\\API\\RoyalGames\\obj\\",
+      "projectPath": "C:\\Users\\23969368839\\Documents\\RoyalGames\\API\\RoyalGames\\RoyalGames.csproj",
+      "packagesPath": "C:\\Users\\23969368839\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\23969368839\\Documents\\RoyalGames\\API\\RoyalGames\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\KaueCMP2\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\23969368839\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -4443,7 +4443,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.300"
+      "SdkAnalysisLevel": "10.0.100"
     },
     "frameworks": {
       "net8.0": {
@@ -4501,7 +4501,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.314/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.108/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
