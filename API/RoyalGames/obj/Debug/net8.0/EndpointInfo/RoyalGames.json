@@ -469,7 +469,7 @@
         }
       }
     },
-    "/api/Jogo/jogo/{id}/imagem": {
+    "/api/Jogo/{id}/imagem": {
       "get": {
         "tags": [
           "Jogo"

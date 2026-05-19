@@ -281,7 +281,7 @@
   {
     "ContainingType": "RoyalGames.Controllers.JogoController",
     "Method": "obterImagem",
-    "RelativePath": "api/Jogo/jogo/{id}/imagem",
+    "RelativePath": "api/Jogo/{id}/imagem",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

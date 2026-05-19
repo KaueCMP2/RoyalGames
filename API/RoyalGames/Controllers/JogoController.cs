@@ -61,18 +61,20 @@ namespace RoyalGames.Controllers
             return Ok(jogo);
         }
 
-        [HttpGet("jogo/{id}/imagem")]
+        [HttpGet("{id}/imagem")]
         public ActionResult obterImagem(int id)
         {
-            var imagem = _service.ObterImagem(id);
-
-            if (imagem == null)
+            try
             {
-                //return StatusCode(404);
-                return NotFound();
-            }
+                byte[] imagem = _service.ObterImagem(id);
 
-            return Ok(imagem);
+                return File(imagem, "Image/jpeg");
+
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
 

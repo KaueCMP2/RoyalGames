@@ -23,10 +23,12 @@ interface JogoListagem {
 export async function listarJogos() {
     try {
         const response = await api.get("Jogo")
+        console.log("111")
+        console.log(response.data)
 
         const jogos = response.data.map((jogo: JogoListagem) => ({
             ...jogo,
-            ImageUrl: `${api.defaults.baseURL}${jogo.imgUrl}`
+            imgUrl: `${api.defaults.baseURL}${jogo.imgUrl}`
         }))
 
         jogos.forEach(jogo => {
@@ -35,7 +37,6 @@ export async function listarJogos() {
 
         let produtosAtivos = jogos.filter(
             ((j: JogoListagem) => j.statusJogo = true)
-
         )
 
         return produtosAtivos;
