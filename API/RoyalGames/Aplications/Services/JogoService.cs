@@ -82,7 +82,7 @@ namespace RoyalGames.Aplications.Services
             return imagem;
         }
 
-        public LerJogoDto Adicionar(CriarJogoDto jogoDto, int usuarioId)
+        public void Adicionar(CriarJogoDto jogoDto, int usuarioId)
         {
             ValidarCadastro(jogoDto);
 
@@ -96,16 +96,19 @@ namespace RoyalGames.Aplications.Services
                 Nome = jogoDto.Nome,
                 Valor = jogoDto.Valor,
                 Descricao = jogoDto.Descricao,
+                ClassificacaoId = jogoDto.ClassificacaoIndicativaId,
                 Imagem = ImagemParaBytes.ConverterImagem(jogoDto.Imagem),
                 StatusJogo = true,
             };
 
-            _repository.Adicionar(Jogo, jogoDto.GeneroIds);
+            Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+            Console.WriteLine(jogoDto.ClassificacaoIndicativaId);
 
-            return JogoParaDto.ConverterParaDto(Jogo);
+            _repository.Adicionar(Jogo, jogoDto.GeneroIds, jogoDto.PlataformaIds);
+
         }
 
-        public LerJogoDto Atualizar(int id, AtualizarJogoDto jogoDto)
+        public void Atualizar(int id, AtualizarJogoDto jogoDto)
         {
             HorarioAlteracaoJogo.ValidarHorario();
 
@@ -127,6 +130,14 @@ namespace RoyalGames.Aplications.Services
                 throw new DomainException("Jogo deve ter ao menos uma categoria.");
             }
 
+            if (jogoDto.ClassificacaoIndicativaId < 0)
+                throw new DomainException("Classificação indicativa invalida");
+
+            if(jogoDto.PlataformaIds == null || jogoDto.PlataformaIds.Count == 0)
+            {
+                throw new DomainException("Jogo deve ter ao menos uma plataforma.");
+            }
+
             if (jogoDto.Valor < 0)
             {
                 throw new DomainException("Preço deve ser maior que zero.");
@@ -135,6 +146,7 @@ namespace RoyalGames.Aplications.Services
             jogoBanco.Nome = jogoDto.Nome;
             jogoBanco.Valor = jogoDto.Valor;
             jogoBanco.Descricao = jogoDto.Descricao;
+            jogoBanco.ClassificacaoId = jogoDto.ClassificacaoIndicativaId;
 
             if (jogoDto.Imagem != null && jogoDto.Imagem.Length > 0)
             {
@@ -146,10 +158,7 @@ namespace RoyalGames.Aplications.Services
                 jogoBanco.StatusJogo = jogoDto.StatusJogo.Value;
             }
 
-            _repository.Atualizar(jogoBanco, jogoDto.CategoriaIds);
-
-            return JogoParaDto.ConverterParaDto(jogoBanco);
-
+            _repository.Atualizar(jogoBanco, jogoDto.CategoriaIds, jogoDto.PlataformaIds);
         }
 
         public void Remover(int id)
