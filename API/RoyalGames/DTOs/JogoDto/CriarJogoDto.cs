@@ -12,5 +12,6 @@
 
         public List<int> GeneroIds { get; set; } = new();
         public int ClassificacaoIndicativaId { get; set; } = new();
+        public List<int> PlataformaIds{ get; set; } = new();
     }
 }
