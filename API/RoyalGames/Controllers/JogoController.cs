@@ -80,7 +80,7 @@ namespace RoyalGames.Controllers
 
         [HttpPost]
         [Consumes("multipart/form-data")] // Indica que recebe dados no formato multpart/from-data
-        [Authorize] // exige login para adicionar Jogos
+        //[Authorize] // exige login para adicionar Jogos
         public IActionResult Adicionar([FromForm] CriarJogoDto JogoDTO)
         {
             try
@@ -99,7 +99,7 @@ namespace RoyalGames.Controllers
         }
 
         [HttpPut("{id}")]
-        [Authorize]
+        //[Authorize]
         public IActionResult Atualizar(int id, [FromForm] AtualizarJogoDto jogoDTO)
         {
             try

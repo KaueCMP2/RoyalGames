@@ -18,6 +18,7 @@ namespace RoyalGames.Repositories
             List<Jogo> jogos = _context.Jogo
                 .Include(p => p.JogoPromocao)
                 .Include(p => p.Log_AlteracaoJogo)
+                .Include(p => p.Classificacao)
                 .Include(p => p.Genero)
                 .Include(p => p.Plataforma)
                 .OrderBy(p => p.JogoId)
@@ -30,6 +31,8 @@ namespace RoyalGames.Repositories
         {
             Jogo? jogo = _context.Jogo
                 .Include(p => p.Genero)
+                .Include(p => p.Classificacao)
+                .Include(p => p.Plataforma)
                 .FirstOrDefault(p => p.JogoId == id);
 
             return jogo;
@@ -39,7 +42,7 @@ namespace RoyalGames.Repositories
         {
             var jogoBanco = _context.Jogo.AsQueryable();
 
-            if(JogoIdAtual.HasValue)
+            if (JogoIdAtual.HasValue)
                 jogoBanco = jogoBanco.Where(p => p.JogoId != JogoIdAtual.Value);
 
             return jogoBanco.Any(p => p.Nome == nome);
@@ -55,7 +58,7 @@ namespace RoyalGames.Repositories
             return imagemJogo;
         }
 
-        public void Adicionar(Jogo jogo, List<int> generoIds)
+        public void Adicionar(Jogo jogo, List<int> generoIds, List<int> plataformaIds)
         {
             // Busca e guarda em generos, todas as categorias cujo o id foi chamado.
             List<Genero> generos = _context.Genero
@@ -65,16 +68,25 @@ namespace RoyalGames.Repositories
             jogo.Genero = generos;
 
             ClassificacaoIndicativa classificacao = _context.ClassificacaoIndicativa
-                .Where(c => c.ClassificacaoId.Equals(c.ClassificacaoId))
+                .Where(c => c.ClassificacaoId.Equals(jogo.ClassificacaoId))
                 .FirstOrDefault();
 
+            List<Plataforma> plataformas = _context.Plataforma
+                .Where(p => plataformaIds.Contains(p.PlataformaId))
+                .ToList();
+
+            jogo.Plataforma = plataformas;
+
             jogo.ClassificacaoId = classificacao.ClassificacaoId;
+
+            Console.WriteLine("2222222222222222222222222222222222222222222222222222222222");
+            Console.WriteLine(classificacao.ClassificacaoId);
 
             _context.Add(jogo);
             _context.SaveChanges();
         }
 
-        public void Atualizar(Jogo jogo, List<int> generoIds)
+        public void Atualizar(Jogo jogo, List<int> generoIds, List<int> plataformaIds)
         {
             Jogo jogoBanco = _context.Jogo
                 .Include(p => p.Genero)
@@ -86,15 +98,15 @@ namespace RoyalGames.Repositories
 
             jogoBanco.Nome = jogo.Nome;
             jogoBanco.Valor = jogo.Valor;
-            jogoBanco.Descricao = jogo.Descricao; 
+            jogoBanco.Descricao = jogo.Descricao;
 
-            if(jogo.Imagem != null)
+            if (jogo.Imagem != null)
                 jogoBanco.Imagem = jogo.Imagem;
 
-            if(jogo.StatusJogo)
+            if (jogo.StatusJogo)
                 jogoBanco.StatusJogo = jogo.StatusJogo;
 
-            if(jogo.ClassificacaoId != 0)
+            if (jogo.ClassificacaoId > 0)
                 jogoBanco.ClassificacaoId = jogo.ClassificacaoId;
 
             //// Busca e guarda em generos, todas as categorias cujo o id foi chamado.
@@ -110,7 +122,20 @@ namespace RoyalGames.Repositories
                 jogoBanco.Genero.Add(genero);
             }
 
-            _context.SaveChanges();
+            List<Plataforma> plataformas = _context.Plataforma
+                .Where(p => plataformaIds.Contains(p.PlataformaId))
+                .ToList();
+
+            jogo.Plataforma = plataformas;
+
+            jogoBanco.Plataforma.Clear();
+
+            foreach (var plataforma in plataformas)
+            {
+                jogo.Plataforma.Add(plataforma);
+            }
+
+            _context.Update(jogo);
         }
 
         public void Remover(int id)
