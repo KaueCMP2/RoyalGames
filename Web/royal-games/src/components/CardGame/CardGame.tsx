@@ -19,7 +19,7 @@ export const CardGame = (jogo: Jogo) => {
                     <h3>{jogo.nome}</h3>
                     <p>{jogo.descricao}</p>
                 </div>
-                <Link href={"/detalhes"} id={styles.link}>Detalhes</Link>
+                <Link href={"/detalhes/" + jogo.jogoId} id={styles.link}>Detalhes</Link>
             </div>
         </li>
     )

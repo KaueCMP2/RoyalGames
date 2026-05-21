@@ -7,6 +7,7 @@ type JogoFormulario = {
     descricao: string,
     statusJogo: boolean,
     imgUrl: string,
+    classificacaoIndicativaId: number;
     generoIds: number[],
 }
 
@@ -18,14 +19,13 @@ interface JogoListagem {
     statusJogo: boolean,
     imgUrl: string,
     plataformaIds: number[],
-    classificacaoId: number;
+    classificacaoIndicativaId: number;
     generoIds: number[]
 }
 
 export async function listarJogos() {
     try {
         const response = await api.get("Jogo")
-        console.log("111")
         console.log(response.data)
 
         const jogos = response.data.map((jogo: JogoListagem) => ({
@@ -44,5 +44,23 @@ export async function listarJogos() {
         return produtosAtivos;
     } catch (error: any) {
         throw new Error(error.response.data);
+    }
+}
+
+export async function listarJogosPorId(id: number) {
+    try {
+        const response = await api.get("Jogo/" + id)
+        console.log(response.data)
+
+        const jogo = {
+            ...response.data,
+            imgUrl: `${api.defaults.baseURL}${response.data.imgUrl}`
+        }
+
+        console.log(response.data.classificacaoIndicativaId);
+
+        return jogo;
+    } catch (error: any) {
+        throw new Error(error.response.data)
     }
 }

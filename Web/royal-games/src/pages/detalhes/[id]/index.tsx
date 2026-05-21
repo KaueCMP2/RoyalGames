@@ -3,7 +3,7 @@ import Header from '@/components/Header/Header'
 import React, { useEffect } from 'react'
 import styles from '@/pages/game-details/game-details.module.css'
 import GameDetails from '@/components/GameDetails/GameDetails'
-import { api } from '../api/apiService'
+import { api } from '@/pages/api/apiService'
 
 interface JogoRecebido {
   jogoId: number,
@@ -29,16 +29,7 @@ const Pag_GameDetails = (jogo: JogoRecebido) => {
   return (
     <>
       <Header />
-      <GameDetails
-        key={jogo.jogoId}
-        jogoId={jogo.jogoId}
-        imgUrl={jogo.imgUrl}
-        nome={jogo.nome}
-        descricao={jogo.descricao}
-        plataformaIds={jogo.plataformaIds}
-        generoIds={jogo.generoIds}
-        classificacaoId={jogo.classificacaoId}
-        valor={jogo.valor} />
+      <GameDetails/>
       <Footer />
     </>
   )
