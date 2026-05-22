@@ -66,7 +66,7 @@ namespace RoyalGames.Aplications.Services
 
             if (jogoDto.GeneroIds == null || jogoDto.GeneroIds.Count == 0)
             {
-                throw new DomainException("Jogo deve ter ao menos uma categoria.");
+                throw new DomainException("Jogo deve ter ao menos um genero.");
             }
         }
 
@@ -125,9 +125,9 @@ namespace RoyalGames.Aplications.Services
                 throw new DomainException("Já existe outro Jogo com esse nome.");
             }
 
-            if (jogoDto.CategoriaIds == null || jogoDto.CategoriaIds.Count == 0)
+            if (jogoDto.GeneroIds == null || jogoDto.GeneroIds.Count == 0)
             {
-                throw new DomainException("Jogo deve ter ao menos uma categoria.");
+                throw new DomainException("Jogo deve ter ao menos um genero.");
             }
 
             if (jogoDto.ClassificacaoIndicativaId < 0)
@@ -153,12 +153,7 @@ namespace RoyalGames.Aplications.Services
                 jogoBanco.Imagem = ImagemParaBytes.ConverterImagem(jogoDto.Imagem);
             }
 
-            if (jogoDto.StatusJogo.HasValue)
-            {
-                jogoBanco.StatusJogo = jogoDto.StatusJogo.Value;
-            }
-
-            _repository.Atualizar(jogoBanco, jogoDto.CategoriaIds, jogoDto.PlataformaIds);
+            _repository.Atualizar(jogoBanco, jogoDto.GeneroIds, jogoDto.PlataformaIds);
         }
 
         public void Remover(int id)

@@ -8,7 +8,7 @@ namespace VHBurger.Aplications.Rules
         {
             var agora = DateTime.Now.TimeOfDay;  // Horario do computador
             var abertura = new TimeSpan(16, 0, 0); // Extrai hora minuto e segundo separado //16h
-            var fechamento = new TimeSpan(23, 0, 0);
+            var fechamento = new TimeSpan(19, 0, 0);
 
             // retorna true ou false
             var estaAberto = agora >= abertura && agora <= fechamento;

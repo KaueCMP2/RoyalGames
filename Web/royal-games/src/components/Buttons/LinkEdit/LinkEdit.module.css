@@ -1,0 +1,11 @@
+#link {
+    text-decoration: none;
+    padding: 4% 8%;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    font-family: var(--fonte-principal);
+    background-color: var(--vermelho-rosado);
+    color: white;
+    border: none;
+    cursor: pointer;
+}

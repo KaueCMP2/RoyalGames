@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import styles from '@/components/SaveGame/SaveGame.module.css'
 import { Alex_Brush } from 'next/font/google'
-import { cadastrarJogos } from '@/pages/api/jogoService'
+import { AtualizarJogos, cadastrarJogos } from '@/pages/api/jogoService'
 import { api } from '@/pages/api/apiService'
 import { listarGeneros } from '@/pages/api/generosService'
 import { listarPlataformas } from '@/pages/api/plataformasService'
 import { listarClassificacao } from '@/pages/api/classificacaoService'
 import Link from 'next/link'
 import { verificarAutenticacao } from '@/utils/auth'
-import { Router } from 'next/router'
+import { Router, useRouter } from 'next/router'
+import { useParams } from 'next/navigation'
 
 interface Classificacao {
     classificacaoId: number;
@@ -38,6 +39,7 @@ const SaveGame = () => {
     const [generosSelecionados, setGenerosSelecionados] = useState<number[]>([])
     const [plataformasSelecionadas, setPlataformasSelecionadas] = useState<number[]>([])
 
+
     async function listarGeneroSel() {
         const lista = await listarGeneros();
         setGeneros(lista);
@@ -66,11 +68,17 @@ const SaveGame = () => {
         plataformaIds: plataformasSelecionadas,
     }
 
-    const router = Router;
+    const router = useRouter();
+    const id = router.query.id;
+
+    let editar: boolean = id ? true : false;
+
     useEffect(() => {
-        if(!verificarAutenticacao()){
-            router.pus
+        if (!verificarAutenticacao()) {
+            router.push("home");
         }
+
+        let editar
 
         listarGeneroSel();
         listarPlataformasSel();
@@ -81,7 +89,7 @@ const SaveGame = () => {
         <section id={styles.save_game}>
             <form action="" id={styles.form_save_game} className='layout-grid'>
                 <div id="top">
-                    <h2 id={styles.titulo_form}>Cadastrar novo jogo</h2>
+                    <h2 id={styles.titulo_form}>{editar == true ? "Editar jogo" : "Cadastrar novo jogo"}</h2>
                 </div>
 
                 <div id={styles.middle} className='layout-grid'>
@@ -167,11 +175,11 @@ const SaveGame = () => {
                     </div>
                 </div>
 
-                    <button onClick={(e) => {
-                        e.preventDefault()
-                        cadastrarJogos(jogo)
+                <button onClick={(e) => {
+                    e.preventDefault()
+                    editar && id != null ? AtualizarJogos(Number(id), jogo) : cadastrarJogos(jogo)
 
-                    }}>Cadastrar</button>
+                }}>{editar ? "Salvar" : "Cadastrar"}</button>
             </form>
         </section >
     )

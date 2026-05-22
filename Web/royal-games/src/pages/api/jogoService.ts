@@ -6,7 +6,7 @@ type JogoFormulario = {
     descricao: string,
     imagem: File | null,
     generoIds: number[],
-    classificacaoIndicativaId: number,
+    classificacaoIndicativaId: number[],
     plataformaIds: number[],
 }
 
@@ -48,11 +48,10 @@ export async function cadastrarJogos(jogo: JogoFormulario) {
         });
 
         await api.post("Jogo", formData)
+        console.log(formData)
 
     } catch (error: any) {
-       
-
-    throw new Error(error.response?.data);
+        throw new Error(error.response?.data);
     }
 }
 
@@ -95,5 +94,42 @@ export async function listarJogosPorId(id: number) {
         return jogo;
     } catch (error: any) {
         throw new Error(error.response.data)
+    }
+}
+
+export async function AtualizarJogos(id: number, jogo: JogoFormulario) {
+    try {
+        const formData = new FormData()
+
+        formData.append("nome", jogo.nome);
+        formData.append("valor", jogo.valor.toString());
+        formData.append("descricao", jogo.descricao);
+
+        if (jogo.imagem) {
+            formData.append("imagem", jogo.imagem);
+        }
+
+        jogo.generoIds.forEach((generoId) => {
+            formData.append("generoIds", generoId.toString())
+        })
+
+        formData.append("classificacaoIndicativaId", jogo.classificacaoIndicativaId.toString())
+
+        jogo.plataformaIds.forEach((plataformaId) => {
+            formData.append("plataformaIds", plataformaId.toString())
+        });
+
+        await api.put("Jogo/" + id, formData)
+        console.log(formData)
+    } catch (error: any) {
+        console.log(error);
+
+        //! Gerei com o chat essa linha de comando
+        throw new Error(
+            error.response?.data?.title ||
+            error.response?.data ||
+            error.message ||
+            "Erro ao cadastrar jogo"
+        );
     }
 }

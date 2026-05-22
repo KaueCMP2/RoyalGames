@@ -96,25 +96,15 @@
 }
 
 /* 1. Largura e Altura da Barra */
-::-webkit-scrollbar {
+.select::-webkit-scrollbar {
   width: 8px;
   height: 1000px;
 }
 
-/* 2. O fundo da barra de rolagem (Trilho) */
-::-webkit-scrollbar-track {
-  background: #f1f1f100; 
-}
-
 /* 3. A "capa" da barra de rolagem que é arrastada (Polegar) */
-::-webkit-scrollbar-thumb {
+.select::-webkit-scrollbar-thumb {
   background: #888; 
   border-radius: 6px; /* Deixa as pontas arredondadas */
-}
-
-/* 4. O "Polegar" ao passar o mouse */
-::-webkit-scrollbar-thumb:hover {
-  background: #555; 
 }
 
 .select option {

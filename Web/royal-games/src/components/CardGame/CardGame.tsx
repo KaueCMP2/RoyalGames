@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from '@/components/CardGame/CardGame.module.css'
 import Link from 'next/link'
+import { LinkDetails } from '../Buttons/LinkDetails/LinkDetails'
+import { LinkEdit } from '../Buttons/LinkEdit/LinkEdit'
 
 type Jogo = {
     jogoId: number,
@@ -9,6 +11,7 @@ type Jogo = {
     descricao: string,
     preco: number,
 }
+
 
 export const CardGame = (jogo: Jogo) => {
     return (
@@ -19,7 +22,8 @@ export const CardGame = (jogo: Jogo) => {
                     <h3>{jogo.nome}</h3>
                     <p>{jogo.descricao}</p>
                 </div>
-                <Link href={"/detalhes/" + jogo.jogoId} id={styles.link}>Detalhes</Link>
+                <LinkDetails id={jogo.jogoId} />
+                <LinkEdit id={jogo.jogoId}/>
             </div>
         </li>
     )

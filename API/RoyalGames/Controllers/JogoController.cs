@@ -101,6 +101,7 @@ namespace RoyalGames.Controllers
 
         [HttpPut("{id}")]
         [Authorize]
+        [Consumes("multipart/form-data")]
         public IActionResult Atualizar(int id, [FromForm] AtualizarJogoDto jogoDTO)
         {
             try

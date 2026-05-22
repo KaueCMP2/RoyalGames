@@ -91,6 +91,7 @@ namespace RoyalGames.Repositories
             Jogo jogoBanco = _context.Jogo
                 .Include(p => p.Genero)
                 .Include(p => p.Classificacao)
+                .Include(p => p.Plataforma)
                 .FirstOrDefault(j => j.JogoId == j.JogoId);
 
             if (jogoBanco == null)
@@ -132,10 +133,13 @@ namespace RoyalGames.Repositories
 
             foreach (var plataforma in plataformas)
             {
-                jogo.Plataforma.Add(plataforma);
+                jogoBanco.Plataforma.Add(plataforma);
             }
 
-            _context.Update(jogo);
+            _context.Update(jogoBanco);
+            Console.WriteLine("ssssssssssssssssssssssssssssssssssssssssssss");
+            Console.WriteLine(jogoBanco);
+            _context.SaveChanges();
         }
 
         public void Remover(int id)

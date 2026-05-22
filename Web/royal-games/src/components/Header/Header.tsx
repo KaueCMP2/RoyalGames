@@ -16,7 +16,7 @@ const Header = () => {
             <div id={styles.content_header} className='layout-grid'>
                 <img src="../logo.png" alt="Logo Royal games em vermelho" id={styles.logo} />
                 <div id={styles.icons_right}>
-                    <Link href="/salvar-jogo">Jogos</Link>
+                    <Link href="/jogo">Jogos</Link>
                     <Link href="/login" id={styles.link_deslog}>{logado}</Link>
                 </div>
             </div>
