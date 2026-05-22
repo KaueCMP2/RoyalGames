@@ -41,27 +41,30 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: start;
-    width: 80%;
+    width: 90%;
     height: 80%;
 }
 
 #content_game_details1 img {
-    width: 40%;
+    height: 100%;
+    max-width: 35%;
 }
 
 #container_info {
-    display: grid;
-    grid-template-rows: auto auto;
-    gap: 15% 0;
-    height: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    justify-content: space-between;
 
-    width: 50%;
+    width: 60%;
+    /* background-color: rgba(255, 192, 203, 0.422); */
 }
 
 #game_article {
     text-align: start;
     width: 100%;
-    height: 100%;
+    height: 50%;
     color: var(--branco);
     box-sizing: border-box;
 
@@ -82,26 +85,42 @@
     font-family: var(--font-tercearia);
 }
 
-
 #game_details {
     color: var(--branco);
     width: 100%;
+    height: 30%;
     display: grid;
-    grid-template-columns: auto auto;
-    gap: 0 0%;
+    grid-template-columns: 1fr 1fr;
+}
+
+#game_details div {
+    display: flex;
+    align-items: center;
+    gap: 2%;
+    height: 100%;
+    width: 100%;
 }
 
 #game_details p {
-    font-family: var(--font-tercearia);
-    font-size: 1.3rem;
+    font-family: var(--font-primaria);
+    font-size: 1.2rem;
+    font-weight: 500;
     margin: 0;
     padding: 0;
-
+    white-space: nowrap;    
 }
 
 #game_details span {
-    font-family: var(--font-padrao);
-    font-weight: 450;
-    font-size: 1.4rem;
+    font-family: var(--font-tercearia);
+    font-weight: 550;
+    font-size: 0.8rem;
     color: var(--branco);
+    background-color: var(--azul-escuro);
+
+    width: max-content;
+    height: max-content;
+    padding: 2%;
+    margin-right: 2%;
+    border-radius: 10px;
+    text-align: center;
 }

@@ -7,14 +7,17 @@ import { listarJogos, listarJogosPorId } from '@/pages/api/jogoService';
 
 interface Jogo {
   jogoId: number,
-  imgUrl: string,
   nome: string,
-  descricao: string,
-  plataformaIds: number[],
-  generos: string[],
-  plataformas: string[],
-  classificacaoId: number;
   valor: number,
+  descricao: string,
+  statusJogo: boolean,
+  imgUrl: string,
+  generoIds: number[],
+  generos: string[],
+  plataformaIds: number[],
+  plataformas: string[],
+  classificacaoIndicativaId: number,
+  classificacaoIndicativa: string[];
 }
 
 const GameDetails = () => {
@@ -27,7 +30,7 @@ const GameDetails = () => {
     try {
       const response = await listarJogosPorId(Number(id));
       console.log(response)
-      
+
       setJogo(response)
     } catch (error: any) {
       console.log(error.message)
@@ -39,7 +42,7 @@ const GameDetails = () => {
 
     setTimeout(() => {
       buscarJogo();
-      console.log(jogo?.classificacaoId)
+      console.log(jogo?.classificacaoIndicativa)
     }, 100)
   }, [id])
 
@@ -56,10 +59,31 @@ const GameDetails = () => {
                 <p>{jogo?.descricao}</p>
               </article>
               <div id={styles.game_details}>
-                <p><span>Classificação indicativa: </span> {jogo?.classificacaoId}</p>
-                <p><span>Preço: </span>{formatarValor(jogo?.valor)}</p>
-                <p><span>Plataformas: </span>{jogo?.plataformas}</p>
-                <p><span>Genero: </span>{jogo?.generos}</p>
+                <div className={styles.container_valor}>
+                  <p>Preço: </p>
+                  <span>{formatarValor(jogo?.valor)}</span>
+                </div>
+
+                <div className={styles.container_classificacao}>
+                  <p>Classificação indicativa: </p>
+                  <span> {jogo?.classificacaoIndicativa}</span>
+                </div>
+
+                <div className={styles.container_plataformas}>
+                  <p>Plataformas: </p>
+                  {jogo?.plataformas.length != 0 ? jogo?.plataformas.map((item) => (
+                    <span> {jogo?.plataformas}</span>
+                  )) : ("Plataformas não inseridas..."
+                  )}
+                </div>
+
+                <div className={styles.container_generos}>
+                  <p>Genero:</p>
+                  {jogo?.generos.length != 0 ? jogo?.generos.map((item) => (
+                    <span> {item}</span>
+                  )) : ("Genero não inseridas..."
+                  )}
+                </div>
               </div>
             </div>
           </div>
