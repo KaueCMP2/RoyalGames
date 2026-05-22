@@ -27,35 +27,30 @@ interface JogoListagem {
 
 export async function cadastrarJogos(jogo: JogoFormulario) {
     try {
-        console.log("entrou aqui")
-
         const formData = new FormData()
 
-        formData.append("Nome", jogo.nome);
-        formData.append("Valor", jogo.valor);
-        formData.append("Descricao", jogo.descricao);
+        formData.append("nome", jogo.nome);
+        formData.append("valor", jogo.valor.toString());
+        formData.append("descricao", jogo.descricao);
 
-        console.log("passou aqui no final olha!")
         if (jogo.imagem) {
-            formData.append("Imagem", jogo.imagem);
+            formData.append("imagem", jogo.imagem);
         }
 
         jogo.generoIds.forEach((generoId) => {
-            formData.append("GeneroIds", generoId.toString())
+            formData.append("generoIds", generoId.toString())
         })
 
-        formData.append("ClassificacaoIndicativaId", jogo.classificacaoIndicativaId.toString())
+        formData.append("classificacaoIndicativaId", jogo.classificacaoIndicativaId.toString())
 
-        console.log("no meio tbm!")
         jogo.plataformaIds.forEach((plataformaId) => {
-            formData.append("PlataformaIds", plataformaId.toString())
+            formData.append("plataformaIds", plataformaId.toString())
         });
 
         await api.post("Jogo", formData)
-        console.log("passou aqui no final olha!")
 
     } catch (error: any) {
-        throw new Error(error.response.data)
+        throw new Error(JSON.stringify(error.response?.data))
     }
 }
 

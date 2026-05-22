@@ -2,8 +2,6 @@ import { api } from "./apiService";
 
 export async function listarPlataformas() {
     const response = await api.get("Plataforma");
-    console.log(response.data);
-
     return response.data;
 }
 

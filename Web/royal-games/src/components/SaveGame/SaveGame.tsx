@@ -6,6 +6,7 @@ import { api } from '@/pages/api/apiService'
 import { listarGeneros } from '@/pages/api/generosService'
 import { listarPlataformas } from '@/pages/api/plataformasService'
 import { listarClassificacao } from '@/pages/api/classificacaoService'
+import Link from 'next/link'
 
 interface Classificacao {
     classificacaoId: number;
@@ -109,24 +110,6 @@ const SaveGame = () => {
                             </div>
 
                             <div id={styles.inpt4}>
-                                <label htmlFor="game-indicative-class">Classificação indicativa</label>
-                                <select name='game-indicative-class' className={styles.select}
-                                    multiple
-                                    value={classificacaoSelecionada.map(String)}
-                                    onChange={(e) => setClassificacaoSeleciona(
-                                        Array.from(e.target.selectedOptions).map((option) => Number(option.value))
-                                    )}>
-                                    {classificacao.map((item) => (
-                                        <option
-                                            value={item.classificacaoId}
-                                            key={item.classificacaoId}>{item.classificacaoNome}</option>
-                                    ))}
-                                </select>
-                            </div>
-                        </div>
-
-                        <div id={styles.row3}>
-                            <div id={styles.inpt5}>
                                 <label htmlFor="game-platform">Plataforma</label>
                                 <select name='game-platform' className={styles.select}
                                     multiple
@@ -137,6 +120,23 @@ const SaveGame = () => {
                                     {plataformas.map((item) => (
                                         <option value={item.plataformaId}
                                             key={item.plataformaId}>{item.nome}</option>
+                                    ))}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div id={styles.row3}>
+                            <div id={styles.inpt5}>
+                                <label htmlFor="game-indicative-class">Classificação indicativa</label>
+                                <select name='game-indicative-class' className={styles.select} id={styles.slc_class}
+                                    value={String(classificacaoSelecionada || "")}
+                                    onChange={(e) => setClassificacaoSeleciona(
+                                        Array.from(e.target.selectedOptions).map((option) => Number(option.value))
+                                    )}>
+                                    {classificacao.map((item) => (
+                                        <option
+                                            value={item.classificacaoId}
+                                            key={item.classificacaoId}>{item.classificacaoNome}</option>
                                     ))}
                                 </select>
                             </div>
@@ -160,11 +160,11 @@ const SaveGame = () => {
                     </div>
                 </div>
 
-                <button onClick={(e) => {
-                    e.preventDefault()
-                    cadastrarJogos(jogo)
+                    <button onClick={(e) => {
+                        e.preventDefault()
+                        cadastrarJogos(jogo)
 
-                }}>Cadastrar</button>
+                    }}>Cadastrar</button>
             </form>
         </section >
     )
