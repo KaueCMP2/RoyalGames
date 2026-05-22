@@ -48,6 +48,9 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddDbContext<RoyalGamesContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddScoped<IClassificacaoRepository, ClassificacaoRepository>();
+builder.Services.AddScoped<ClassificacaoService>();
+
 // Jogo
 builder.Services.AddScoped<IJogoRepository, JogoRepository>();
 builder.Services.AddScoped<JogoService>();

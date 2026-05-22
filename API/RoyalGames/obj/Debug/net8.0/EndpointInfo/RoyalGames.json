@@ -53,6 +53,84 @@
         }
       }
     },
+    "/api/Classificacao": {
+      "get": {
+        "tags": [
+          "Classificacao"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LerClassificacaoDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LerClassificacaoDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LerClassificacaoDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Classificacao/{id}": {
+      "get": {
+        "tags": [
+          "Classificacao"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LerClassificacaoDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LerClassificacaoDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LerClassificacaoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Genero": {
       "get": {
         "tags": [
@@ -962,6 +1040,20 @@
         },
         "additionalProperties": false
       },
+      "LerClassificacaoDto": {
+        "type": "object",
+        "properties": {
+          "classificacaoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "classificacaoNome": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "LerGeneroDto": {
         "type": "object",
         "properties": {
@@ -1018,16 +1110,27 @@
             },
             "nullable": true
           },
-          "classificacaoIndicativaId": {
-            "type": "integer",
-            "format": "int32"
-          },
           "plataformaIds": {
             "type": "array",
             "items": {
               "type": "integer",
               "format": "int32"
             },
+            "nullable": true
+          },
+          "plataformas": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "classificacaoIndicativaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "classificacaoIndicativa": {
+            "type": "string",
             "nullable": true
           }
         },
