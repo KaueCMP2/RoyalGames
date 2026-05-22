@@ -8,22 +8,22 @@ import { listarPlataformas } from '@/pages/api/plataformasService'
 import { listarClassificacao } from '@/pages/api/classificacaoService'
 
 interface Classificacao {
-    ClassificacaoId: number;
-    Nome: string;
+    classificacaoId: number;
+    classificacaoNome: string;
 }
 
 interface Genero {
-    GeneroId: number,
-    Nome: string
+    generoId: number,
+    nome: string
 }
 
 interface Plataforma {
-    PlataformaId: number,
-    Nome: string
+    plataformaId: number,
+    nome: string
 }
 
 const SaveGame = () => {
-    const [classificacoes, setClassificacoes] = useState<Classificacao[]>([])
+    const [classificacao, setClassificacao] = useState<Classificacao[]>([])
     const [generos, setGeneros] = useState<Genero[]>([])
     const [plataformas, setPlataformas] = useState<Plataforma[]>([])
 
@@ -38,16 +38,19 @@ const SaveGame = () => {
     async function listarGeneroSel() {
         const lista = await listarGeneros();
         setGeneros(lista);
+        return generos;
     }
 
     async function listarPlataformasSel() {
         const lista = await listarPlataformas()
         setPlataformas(lista);
+        return plataformas;
     }
 
     async function listarClassificacaoSel() {
         const lista = await listarClassificacao()
-        setClassificacoes(lista);
+        setClassificacao(lista);
+        return classificacao;
     }
 
     const jogo = {
@@ -97,8 +100,10 @@ const SaveGame = () => {
                                         Array.from(e.target.selectedOptions).map((option) => Number(option.value))
                                     )}>
                                     {generos.map((item) => (
-                                        <option value={item.GeneroId}
-                                            key={item.GeneroId}>{item.Nome}</option>
+                                        <option
+                                            key={item.generoId}
+                                            value={item.generoId}>{item.nome}</option>
+
                                     ))}
                                 </select>
                             </div>
@@ -111,10 +116,10 @@ const SaveGame = () => {
                                     onChange={(e) => setClassificacaoSeleciona(
                                         Array.from(e.target.selectedOptions).map((option) => Number(option.value))
                                     )}>
-                                    {classificacoes.map((item) => (
+                                    {classificacao.map((item) => (
                                         <option
-                                            key={item.ClassificacaoId}
-                                            value={item.ClassificacaoId}>{item.Nome}</option>
+                                            value={item.classificacaoId}
+                                            key={item.classificacaoId}>{item.classificacaoNome}</option>
                                     ))}
                                 </select>
                             </div>
@@ -130,8 +135,8 @@ const SaveGame = () => {
                                         Array.from(e.target.selectedOptions).map((option) => Number(option.value))
                                     )}>
                                     {plataformas.map((item) => (
-                                        <option value={item.PlataformaId}
-                                            key={item.PlataformaId}>{item.Nome}</option>
+                                        <option value={item.plataformaId}
+                                            key={item.plataformaId}>{item.nome}</option>
                                     ))}
                                 </select>
                             </div>
@@ -155,7 +160,11 @@ const SaveGame = () => {
                     </div>
                 </div>
 
-                <button>Cadastrar</button>
+                <button onClick={(e) => {
+                    e.preventDefault()
+                    cadastrarJogos(jogo)
+
+                }}>Cadastrar</button>
             </form>
         </section >
     )

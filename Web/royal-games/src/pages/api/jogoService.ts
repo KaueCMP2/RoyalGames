@@ -4,9 +4,9 @@ type JogoFormulario = {
     nome: string,
     valor: string,
     descricao: string,
-    imgUrl: string,
+    imagem: File | null,
     generoIds: number[],
-    classificacaoIndicativaId: number,
+    classificacaoIndicativaId: number[],
     plataformaIds: number[],
 }
 
@@ -27,24 +27,32 @@ interface JogoListagem {
 
 export async function cadastrarJogos(jogo: JogoFormulario) {
     try {
+        console.log("entrou aqui")
+
         const formData = new FormData()
 
-        formData.append("nome", jogo.nome);
-        formData.append("valor", jogo.valor);
-        formData.append("descricao", jogo.descricao);
+        formData.append("Nome", jogo.nome);
+        formData.append("Valor", jogo.valor);
+        formData.append("Descricao", jogo.descricao);
 
-        if (jogo.imgUrl) {
-            formData.append("imgUrl", jogo.imgUrl);
+        console.log("passou aqui no final olha!")
+        if (jogo.imagem) {
+            formData.append("Imagem", jogo.imagem);
         }
+
         jogo.generoIds.forEach((generoId) => {
-            formData.append("generoIds", generoId.toString())
+            formData.append("GeneroIds", generoId.toString())
         })
+
+        formData.append("ClassificacaoIndicativaId", jogo.classificacaoIndicativaId.toString())
+
+        console.log("no meio tbm!")
         jogo.plataformaIds.forEach((plataformaId) => {
-            formData.append("plataformaIds", plataformaId.toString())
+            formData.append("PlataformaIds", plataformaId.toString())
         });
-        formData.append("classificacaoIndicativaId", jogo.classificacaoIndicativaId.toString())
 
         await api.post("Jogo", formData)
+        console.log("passou aqui no final olha!")
 
     } catch (error: any) {
         throw new Error(error.response.data)
