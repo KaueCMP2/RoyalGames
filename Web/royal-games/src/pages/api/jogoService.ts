@@ -6,7 +6,7 @@ type JogoFormulario = {
     descricao: string,
     imagem: File | null,
     generoIds: number[],
-    classificacaoIndicativaId: number[],
+    classificacaoIndicativaId: number,
     plataformaIds: number[],
 }
 
@@ -50,7 +50,9 @@ export async function cadastrarJogos(jogo: JogoFormulario) {
         await api.post("Jogo", formData)
 
     } catch (error: any) {
-        throw new Error(JSON.stringify(error.response?.data))
+       
+
+    throw new Error(error.response?.data);
     }
 }
 

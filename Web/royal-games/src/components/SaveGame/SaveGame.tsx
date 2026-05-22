@@ -7,6 +7,8 @@ import { listarGeneros } from '@/pages/api/generosService'
 import { listarPlataformas } from '@/pages/api/plataformasService'
 import { listarClassificacao } from '@/pages/api/classificacaoService'
 import Link from 'next/link'
+import { verificarAutenticacao } from '@/utils/auth'
+import { Router } from 'next/router'
 
 interface Classificacao {
     classificacaoId: number;
@@ -64,7 +66,12 @@ const SaveGame = () => {
         plataformaIds: plataformasSelecionadas,
     }
 
+    const router = Router;
     useEffect(() => {
+        if(!verificarAutenticacao()){
+            router.pus
+        }
+
         listarGeneroSel();
         listarPlataformasSel();
         listarClassificacaoSel();
