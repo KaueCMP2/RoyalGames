@@ -1,14 +1,13 @@
 import { api } from "./apiService"
 
 type JogoFormulario = {
-    jogoId: number,
     nome: string,
-    valor: number,
+    valor: string,
     descricao: string,
-    statusJogo: boolean,
     imgUrl: string,
-    classificacaoIndicativaId: number;
     generoIds: number[],
+    classificacaoIndicativaId: number,
+    plataformaIds: number[],
 }
 
 interface JogoListagem {
@@ -18,9 +17,38 @@ interface JogoListagem {
     descricao: string,
     statusJogo: boolean,
     imgUrl: string,
+    generoIds: number[],
+    generos: string[],
     plataformaIds: number[],
-    classificacaoIndicativaId: number;
-    generoIds: number[]
+    plataformas: string[],
+    classificacaoIndicativaId: number,
+    classificacaoIndicativa: string[];
+}
+
+export async function cadastrarJogos(jogo: JogoFormulario) {
+    try {
+        const formData = new FormData()
+
+        formData.append("nome", jogo.nome);
+        formData.append("valor", jogo.valor);
+        formData.append("descricao", jogo.descricao);
+
+        if (jogo.imgUrl) {
+            formData.append("imgUrl", jogo.imgUrl);
+        }
+        jogo.generoIds.forEach((generoId) => {
+            formData.append("generoIds", generoId.toString())
+        })
+        jogo.plataformaIds.forEach((plataformaId) => {
+            formData.append("plataformaIds", plataformaId.toString())
+        });
+        formData.append("classificacaoIndicativaId", jogo.classificacaoIndicativaId.toString())
+
+        await api.post("Jogo", formData)
+
+    } catch (error: any) {
+        throw new Error(error.response.data)
+    }
 }
 
 export async function listarJogos() {
@@ -57,7 +85,7 @@ export async function listarJogosPorId(id: number) {
             imgUrl: `${api.defaults.baseURL}${response.data.imgUrl}`
         }
 
-        console.log(response.data.classificacaoIndicativaId);
+        console.log(response.data.plataformaIds);
 
         return jogo;
     } catch (error: any) {
