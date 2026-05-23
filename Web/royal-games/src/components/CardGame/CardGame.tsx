@@ -3,6 +3,7 @@ import styles from '@/components/CardGame/CardGame.module.css'
 import Link from 'next/link'
 import { LinkDetails } from '../Buttons/LinkDetails/LinkDetails'
 import { LinkEdit } from '../Buttons/LinkEdit/LinkEdit'
+import { BtnDelete } from '../Buttons/BtnDelete/BtnDelete'
 
 type Jogo = {
     jogoId: number,
@@ -23,7 +24,8 @@ export const CardGame = (jogo: Jogo) => {
                     <p>{jogo.descricao}</p>
                 </div>
                 <LinkDetails id={jogo.jogoId} />
-                <LinkEdit id={jogo.jogoId}/>
+                <LinkEdit id={jogo.jogoId} />
+                <BtnDelete id={jogo.jogoId} />
             </div>
         </li>
     )
