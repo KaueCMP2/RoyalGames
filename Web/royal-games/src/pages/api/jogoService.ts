@@ -1,3 +1,4 @@
+import { toastConfirmarExclusao } from "@/utils/toasts";
 import { api } from "./apiService"
 
 type JogoFormulario = {
@@ -125,6 +126,30 @@ export async function AtualizarJogos(id: number, jogo: JogoFormulario) {
         console.log(error);
 
         //! Gerei com o chat essa linha de comando
+        throw new Error(
+            error.response?.data?.title ||
+            error.response?.data ||
+            error.message ||
+            "Erro ao cadastrar jogo"
+        );
+    }
+}
+
+export async function removerJogo(id: number) {
+    try {
+        if (id) {
+            api.delete("Jogo/" + id);
+            toastConfirmarExclusao;
+        }
+    }
+    catch (error: any) {
+
+        console.log(error.response);
+
+        console.log(error.response?.data);
+
+        console.log(error.response?.status);
+
         throw new Error(
             error.response?.data?.title ||
             error.response?.data ||
