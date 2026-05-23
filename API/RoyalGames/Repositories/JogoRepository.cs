@@ -148,7 +148,7 @@ namespace RoyalGames.Repositories
             if (jogoRemovido == null)
                 return;
 
-            _context.Remove(jogoRemovido);
+            _context.Remove(jogoRemovido.JogoId);
             _context.SaveChanges();
         }
     }
